@@ -33,5 +33,9 @@
     # nix lsp
     nil
     #waybar
-  ];
+    eza
+    fastfetch
+    htop
+    btop
+];
 }
