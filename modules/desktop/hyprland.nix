@@ -1,31 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  #environment.etc."xdg/wayland-sessions/hyprland.desktop".text = ''
-  #[Desktop Entry]
-  #Name=Hyprland (NixOS declartive)
-  #Exec=Hyprland --config /etc/hypr/hyprland.conf
-  #Type=Application
-  #DesktopNames=Hyprland
-#'';
-  
+    
   environment.systemPackages = with pkgs; [
     hyprland
     xdg-desktop-portal-hyprland
   ];
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
 
   home-manager.users.mujaxso = {
     wayland.windowManager.hyprland = {
@@ -102,8 +82,8 @@
       "$modifier,8,workspace,8"
       "$modifier,9,workspace,9"
       "$modifier,0,workspace,10"
-      "$modifier ,SHIFT,Space,movetoworkspace,special"
-      "$modifier,SHIFT,Return,togglespecialworkspace"
+#      "$modifier ,SHIFT,Space,movetoworkspace,special"
+#      "$modifier,SHIFT,Return,togglespecialworkspace"
       "$modifier SHIFT,1,movetoworkspace,1"
       "$modifier SHIFT,2,movetoworkspace,2"
       "$modifier SHIFT,3,movetoworkspace,3"

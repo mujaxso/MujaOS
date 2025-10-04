@@ -11,6 +11,7 @@
     # ../../modules/desktop/waybar.nix
     # ../../modules/desktop/kitty.nix
     ../../modules/desktop/desktop.nix
+    ../../modules/system/system.nix
   ];
 
   networking.hostName = "laptop"; # Define your hostname.
