@@ -1,0 +1,16 @@
+* {
+    font-family: "Fira Code", monospace;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+#cpu { color: #ff5555; }
+#memory { color: #50fa7b; }
+#disk { color: #ffb86c; }
+#network { color: #8be9fd; }
+#battery { color: #f1fa8c; }
+#volume { color: #ff79c6; }
+#brightness { color: #bd93f9; }
+#clock { color: #ffb8f1; }
+#workspaces { color: #50fa7b; }
+#weather { color: #8be9fd; }

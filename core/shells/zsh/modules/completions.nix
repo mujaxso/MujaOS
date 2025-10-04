@@ -1,0 +1,4 @@
+{ ... }:
+{
+  programs.zsh.enableCompletion = true;
+}
