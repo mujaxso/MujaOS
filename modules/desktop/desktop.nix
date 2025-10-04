@@ -3,7 +3,7 @@
 {
   imports = [
     ./hyprland.nix
-    ./kitty.nix
+#    ./kitty.nix
     ./waybar/waybar.nix
     ./sddm.nix
     ./pipewire.nix

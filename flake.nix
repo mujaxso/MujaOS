@@ -1,5 +1,5 @@
 {
-  description = "Modular NixOS flake with Home Manager, Hyprland, and Kitty";
+  description = "MujaOS - Modular NixOS flake with Home Manager, Hyprland, and Kitty";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

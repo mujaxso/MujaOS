@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ../desktop/kitty.nix
+  ];
+  
   home.username = "mujaxso";
   home.homeDirectory = "/home/mujaxso";
   home.sessionVariables = {
     XDG_CONFIG_HOME = "/etc/xdg";
   };
-#  home.file.".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "etc/hypr";
-#  home.file.".config/hypt".force = true;
+
   programs.home-manager.enable = true;
 
   # REQUIRED!

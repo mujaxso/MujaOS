@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  system.userActivationScripts.zshrc = "touch .zshrc";
+  
   programs.zsh = {
     enable = true;
 
@@ -8,14 +10,17 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestions.enable = true;
-
-    promptInit = ''
-      # Use powerlevel10k if installed
-      if [ -f ${pkgs.zsh-powerlevel10k}/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]; then
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-      fi
-      [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-    '';
+    histSize = 10000;
+    histFile = "$HOME/.zsh_history";
+    setOptions = [ "HIST_IGNORE_ALL_DUPS" ];
+    dotDir = ".config/zsh";
+    # promptInit = ''
+    #   # Use powerlevel10k if installed
+    #   if [ -f ${pkgs.zsh-powerlevel10k}/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme ]; then
+    #     source ${pkgs.zsh-powerlevel10k}/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+    #   fi
+    #   [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+    # '';
 
     shellAliases = {
       # File management
