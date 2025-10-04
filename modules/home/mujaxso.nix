@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   home.username = "mujaxso";
   home.homeDirectory = "/home/mujaxso";
@@ -28,5 +27,8 @@
     cliphist
     tree
     unzip
+    # nix lsp
+    nil
+    #waybar
   ];
 }

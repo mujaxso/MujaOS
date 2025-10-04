@@ -4,6 +4,8 @@
   imports = [
     ./hyprland.nix
     ./kitty.nix
-    ./waybar.nix
+    ./waybar/waybar.nix
   ];
+
+  services.waybar.enable = true;
 }
