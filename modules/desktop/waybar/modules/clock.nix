@@ -1,1 +1,0 @@
-{ pkgs }: { format = "%H:%M:%S"; interval = 1; }

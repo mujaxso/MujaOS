@@ -7,7 +7,7 @@
     ./users.nix
     #./git.nix
     # shells
-    ./shells/zsh/zsh.nix
+    ./shells/shells.nix
     
   ];
 
