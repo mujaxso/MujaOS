@@ -2,6 +2,7 @@
 {
   imports = [
     ../desktop/desktop.nix
+    ../programs/programs.nix
     #../desktop/gtk.nix
   ];
   
@@ -25,7 +26,6 @@
     slurp
     wl-clipboard
     dunst
-    emacs
     neovim
     cliphist
     tree

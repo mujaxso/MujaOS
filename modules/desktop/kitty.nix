@@ -16,6 +16,8 @@
       shell = "zsh";
       enable_audio_bell = false;
       copy_on_select = true;
+      #background = "#1e1e2e";
+      background_opacity = "0.75";
       window_padding_width = 10;
       scrollback_lines = 10000;
       show_hyperlink_targets = "yes";

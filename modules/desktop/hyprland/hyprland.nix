@@ -13,7 +13,7 @@ let
   misc = import (modulesDir + "/misc.nix");
   autostart = import (modulesDir + "/autostart.nix");
   monitor = import (modulesDir + "/monitor.nix");
-  #rules = import (modulesDir + "/rules.nix");
+  rules = import (modulesDir + "/rules.nix");
 in {
   home.packages = packages;
 
@@ -33,7 +33,7 @@ in {
       decoration = decoration;
       dwindle = dwindle;
       misc = misc;
-      #rules = rules;
+      rules = rules;
     };
   };
 }
