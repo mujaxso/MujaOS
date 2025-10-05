@@ -1,39 +1,39 @@
 { config, pkgs, ... }:
 
 let
-  hyprModules = [
-    ./modules/appearance.nix
-    ./modules/animations.nix
-    ./modules/keybindings.nix
-    ./modules/rules.nix
-    ./modules/workspaces.nix
-    ./modules/monitors.nix
-    #./modules/input.nix
-    #./modules/autostart.nix
-  ];
-in
-{
-  imports = hyprModules;
+  modulesDir = ./modules;
 
-  programs.hyprland = {
+  packages = import (modulesDir + "/packages.nix") { inherit pkgs; };
+  bindings = import (modulesDir + "/bindings.nix");
+  input = import (modulesDir + "/input.nix");
+  general = import (modulesDir + "/general.nix");
+  animations = import (modulesDir + "/animations.nix");
+  decoration = import (modulesDir + "/decoration.nix");
+  dwindle = import (modulesDir + "/dwindle.nix");
+  misc = import (modulesDir + "/misc.nix");
+  autostart = import (modulesDir + "/autostart.nix");
+  monitor = import (modulesDir + "/monitor.nix");
+  #rules = import (modulesDir + "/rules.nix");
+in {
+  home.packages = packages;
+
+  wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.unstable.hyprland;
-    withUWSM = true;
-    xwayland.enable = true;
+    extraConfig = ''
+      exec-once = hyprland --config /etc/hypr/hyprland.conf
+    '';
+    settings = {
+      monitor = monitor;
+      exec-once = autostart;
+
+      inherit (bindings) bind bindm;
+      input = input;
+      general = general;
+      animations = animations;
+      decoration = decoration;
+      dwindle = dwindle;
+      misc = misc;
+      #rules = rules;
+    };
   };
-
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.defaultSession = "hyprland";
-
-  environment.systemPackages = with pkgs; [
-    hyprpaper
-    dunst
-    mako
-    kitty
-    rofi
-    grim
-    slurp
-    wl-clipboard
-  ];
 }

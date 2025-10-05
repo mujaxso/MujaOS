@@ -30,7 +30,7 @@
 
     clock = {
       interval = 30;
-      format = "{:%Y-%m-%d %H:%M}";
+      format = "{:%H:%M}";
       on-click = "gsimplecal";
     };
 

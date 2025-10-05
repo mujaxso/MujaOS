@@ -1,12 +1,6 @@
-{ ... }:
-
-{
-  programs.hyprland.settings.exec-once = [
-    "hyprpaper"
-    "waybar"
-    "nm-applet"
-    "pasystray"
-    "mako"
-    "blueman-applet"
-  ];
-}
+[
+  "waybar"
+  "nm-applet --indicator"
+  "dunst"
+  "cliphist wl-paste --watch"
+]
