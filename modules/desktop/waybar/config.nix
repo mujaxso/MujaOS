@@ -41,8 +41,8 @@
 
     network = {
       format-wifi = "  {signalStrength}%";
-      format-ethernet = " {ipaddr}";
-      format-disconnected = "⚠";
+      format-ethernet = "󰈀 {ipaddr}";
+      format-disconnected = "󰌙";
     };
 
     pulseaudio = {
@@ -81,7 +81,6 @@
         "1" = "󰖟";
         "2" = "";
         "3" = "";
-        # etc
       };
       sort-by-number = true;
       all-outputs = true;
