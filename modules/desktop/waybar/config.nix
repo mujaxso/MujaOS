@@ -74,5 +74,27 @@
       tooltip-format = "Power Menu";
       on-click = "~/.config/waybar/scripts/power-menu.sh";
     };
+
+    "hyprland/workspaces" = {
+      format = "{icon}";  # or "{id}" or "{name} {icon}" etc.
+      format-icons = {
+        "1" = "󰖟";
+        "2" = "";
+        "3" = "";
+        # etc
+      };
+      sort-by-number = true;
+      all-outputs = true;
+      on-click = "activate";
+      disable-scroll = false;
+    };
+
+    "hyprland/window" = {
+      format = "{title}";
+      icon = false;
+      expand = true;
+      max-length = 20;
+      separate-outputs = true;
+    };
   };
 }
