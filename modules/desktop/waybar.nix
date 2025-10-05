@@ -1,29 +1,52 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [ waybar ];
+  programs.waybar = {
+    enable = true;
+    package = pkgs.waybar;
+    systemd.enable = true;
 
-  home-manager.users.mujaxso = {
-    programs.waybar = {
-      enable = true;
-      settings = {
-        mainBar = {
-          layer = "top";
-          position = "top";
-          modules-left = [ "hyprland/workspaces" ];
-          modules-center = [ "clock" ];
-          modules-right = [ "pulseaudio" "network" "battery" "tray" ];
-          clock = { format = "{:%Y-%m-%d %H:%M}"; };
-          battery = { format = "{capacity}% {icon}"; format-icons = [ "" "" "" "" "" ]; };
-          network = { format-wifi = " {signalStrength}%"; format-ethernet = " {ipaddr}"; format-disconnected = "⚠"; };
-          pulseaudio = { format = "{volume}% {icon}"; format-icons = [ "" "" "" ]; };
+    # Define one or more bar configurations
+    settings = {
+      # Example: main bar on primary display
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        output = [ "eDP-1" ];
+
+        modules-left = [ "hyprland/workspaces" "hyprland/mode" ];
+        modules-center = [ "hyprland/window" ];
+        modules-right = [
+          "clock"
+          "battery"
+          "pulseaudio"
+          "network"
+        ];
+
+        # Module-specific settings
+        battery = {
+          states.critical = 15;
+          format = "{capacity}% {icon}";
+        };
+
+        clock = {
+          format = "%H:%M";
+          tooltip-format = "{:%Y-%m-%d %H:%M}";
         };
       };
-      style = ''
-        * { border: none; font-family: "JetBrains Mono", monospace; font-size: 13px; }
-        window#waybar { background-color: rgba(30,30,30,0.9); color: #fff; }
-        #workspaces button.active { border-bottom: 2px solid #fff; }
-      '';
     };
+
+    # Optional: inline CSS styling
+    style = ''
+      * {
+        font-family: "Fira Code";
+        font-size: 14px;
+      }
+      window#waybar {
+        background: rgba(40, 40, 40, 0.9);
+        color: #ffffff;
+      }
+    '';
   };
 }

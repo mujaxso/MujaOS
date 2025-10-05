@@ -3,12 +3,11 @@
 {
   imports = [
     ./hyprland.nix
-#    ./kitty.nix
-    ./waybar/waybar.nix
-    ./sddm.nix
-    ./pipewire.nix
+    ./gtk.nix
+    ./kitty.nix
+    ./waybar.nix
+    #./pipewire.nix
     
   ];
 
-  services.waybar.enable = true;
 }

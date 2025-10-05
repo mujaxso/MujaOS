@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../desktop/kitty.nix
+    ../desktop/desktop.nix
+    #../desktop/gtk.nix
   ];
   
   home.username = "mujaxso";
@@ -11,7 +12,7 @@
   };
 
   programs.home-manager.enable = true;
-
+  
   # REQUIRED!
   home.stateVersion = "25.05"; # pick your NixOS version
 
@@ -19,7 +20,6 @@
   home.packages = with pkgs; [
     firefox
     brave
-    git
     rofi
     grim
     slurp
@@ -32,10 +32,11 @@
     unzip
     # nix lsp
     nil
-    #waybar
     eza
     fastfetch
     htop
     btop
+    alacritty
+    pcmanfm
 ];
 }

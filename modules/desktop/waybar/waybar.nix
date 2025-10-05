@@ -6,10 +6,11 @@
     ./style.nix
   ];
 
+
   options.services.waybar.enable = lib.mkEnableOption "Enable Waybar";
 
   config = lib.mkIf config.services.waybar.enable {
-    environment.systemPackages = [ pkgs.waybar ];
+    #environment.systemPackages = [ pkgs.waybar ];
 
     environment.etc."xdg/waybar/config".text =
       builtins.toJSON config.services.waybar.settings;

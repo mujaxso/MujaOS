@@ -10,7 +10,8 @@
     # ../../modules/desktop/hyprland.nix
     # ../../modules/desktop/waybar.nix
     # ../../modules/desktop/kitty.nix
-    ../../modules/desktop/desktop.nix
+    ../../modules/desktop/sddm.nix
+    
     ../../modules/system/system.nix
   ];
 
@@ -53,13 +54,46 @@
   #   useOSProber = true; # optional, if you dual boot
   # };
 
-  #environment.etc."hypr/hyprland.conf".source = ./hyprland.conf;
   
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # Make sure GRUB is OFF
   boot.loader.grub.enable = false;
 
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+  
   services.dbus.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+
+  };
+
+  # programs.waybar = {
+  #   enable = true;
+
+  # };
+  
+  #services.waybar.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    libllvm
+    clang
+    cmake
+    gnumake
+    libtool
+    libvterm
+    glibtool
+    
+    wget
+    
+  ];
+
+  
   system.stateVersion = "25.05";
 }
