@@ -1,13 +1,13 @@
 * {
     font:   "Montserrat 12";
 
-    bg0:     #F5F5F5BF;
-    bg1:     #7E7E7E80;
-    bg2:     #0860F2E6;
+    bg0:     #1E1E2ECC;   /* Darker, semi-transparent background */
+    bg1:     #373758CC;   /* Slightly lighter dark for borders etc */
+    bg2:     #5680F9E6;   /* Bright blue highlight */
 
-    fg0:     #242424;
-    fg1:     #FFFFFF;
-    fg2:     #24242480;
+    fg0:     #E0E0E0;     /* Light gray foreground */
+    fg1:     #FFFFFF;     /* Pure white */
+    fg2:     #B0B0C080;   /* Soft light foreground for placeholder */
 
     background-color:   transparent;
     text-color:         @fg0;
@@ -22,7 +22,7 @@ window {
 
     location:       center;
     width:          640;
-    border-radius:  8;
+    border-radius:  10;
 }
 
 inputbar {
@@ -36,6 +36,7 @@ icon-search {
     expand:     false;
     filename:   "search";
     size: 28px;
+    color: @fg2;  /* subtle color */
 }
 
 icon-search, entry, element-icon, element-text {
@@ -47,6 +48,9 @@ entry {
 
     placeholder         : "Search";
     placeholder-color   : @fg2;
+    text-color: @fg1;
+    background-color: transparent;
+    border: none;
 }
 
 message {
@@ -66,6 +70,7 @@ listview {
     fixed-height:   false;
     border:         1px 0 0;
     border-color:   @bg1;
+    background-color: transparent;
 }
 
 element {
@@ -85,10 +90,12 @@ element alternate active {
 element selected normal, element selected active {
     background-color:   @bg2;
     text-color:         @fg1;
+    border-radius: 6;
 }
 
 element-icon {
     size:   1em;
+    color:  @fg1;
 }
 
 element-text {
