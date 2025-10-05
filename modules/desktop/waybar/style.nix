@@ -1,89 +1,58 @@
 ''
 * {
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  color: #e0e0e0;
+    font-family: "Ubuntu Mono Nerd Font", "Ubuntu Mono", monospace, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #eeeeee;
 }
 
-window#waybar {
-  background-color: rgba(40, 40, 40, 0.95);
-  border-bottom: 2px solid #81a1c1;
+#waybar {
+    background: rgba(0, 0, 0, 0);
+    box-shadow: none;
+    border: none;
+    padding: 6px 12px;
 }
 
-#workspaces button {
-  padding: 6px 14px;
-  color: #a0a0a0;
-  background-color: transparent;
-  border-radius: 8px;
-  font-weight: 500;
-  letter-spacing: 0.03em;
+#waybar * {
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
 
-#workspaces button.focused {
-  color: #eceff4;
-  background-color: #5e81ac;
-  border-radius: 10px;
+#waybar .module {
+    padding: 0 10px;
+    margin: 0 5px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
 }
 
-#clock,
-#cpu,
-#memory,
-#battery,
-#pulseaudio,
-#network,
-#tray {
-  padding: 0 14px;
-  margin: 0 6px;
-  background-color: rgba(59, 66, 82, 0.8);
-  border-radius: 12px;
-  font-weight: 600;
+#waybar .module:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-#battery {
-  color: #a3be8c;
-  font-weight: 700;
+#waybar .clock {
+    font-weight: 600;
+    font-size: 13px;
 }
 
-#battery.warning {
-  color: #ebcb8b;
-  font-weight: 700;
+#waybar .battery,
+#waybar .cpu,
+#waybar .network {
+    font-weight: 600;
 }
 
-#battery.critical {
-  color: #bf616a;
-  font-weight: 700;
+/* Optional separator */
+#waybar .separator {
+    margin: 0 8px;
+    color: #666666;
 }
 
-#network.disconnected {
-  color: #bf616a;
-  font-weight: 700;
-}
-
-#pulseaudio.muted {
-  color: #888;
-}
-
-tooltip {
-  background-color: rgba(46, 52, 64, 0.95);
-  color: #d8dee9;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-#custom-power {
-  color: #bf616a;
-  padding: 0 14px;
-  font-size: 18px;
-  border-radius: 8px;
-}
-
-#custom-power:hover {
-  background-color: rgba(59, 66, 82, 0.8);
-  color: #f07178;
+/* Tooltip */
+.tooltip {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #eee;
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-size: 11px;
 }
 ''
