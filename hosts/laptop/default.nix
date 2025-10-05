@@ -89,7 +89,7 @@
     libtool
     libvterm
     glibtool
-    
+    neovim
     wget
     
   ];

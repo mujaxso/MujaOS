@@ -8,6 +8,7 @@
     ./rofi/rofi.nix
     ./gtk.nix
     ./kitty.nix
+    ./cursor.nix
     #./pipewire.nix
     
   ];

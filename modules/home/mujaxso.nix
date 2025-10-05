@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib,... }:
 {
   imports = [
     ../desktop/desktop.nix
@@ -9,8 +9,10 @@
   home.username = "mujaxso";
   home.homeDirectory = "/home/mujaxso";
   home.sessionVariables = {
-    XDG_CONFIG_HOME = "/etc/xdg";
+    #GTK_THEME = "Materia-dark";
+    XDG_CONFIG_HOME = lib.mkForce "${config.home.homeDirectory}/.config";
   };
+  xdg.enable = true;
 
   programs.home-manager.enable = true;
   
@@ -19,9 +21,6 @@
 
   
   home.packages = with pkgs; [
-    firefox
-    brave
-    rofi
     grim
     slurp
     wl-clipboard
@@ -38,5 +37,5 @@
     btop
     alacritty
     pcmanfm
-];
+  ];
 }

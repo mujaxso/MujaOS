@@ -3,6 +3,7 @@
 {
   imports = [
     ./emacs.nix
+    ./brave.nix
   ];
 
 }

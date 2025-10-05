@@ -5,7 +5,7 @@ let
   waybarStyle = import ./style.nix;
 in {
   programs.waybar = {
-    enable = true;
+    #enable = true;
     package = pkgs.waybar;
     systemd.enable = true;
     settings = waybarConfig;
