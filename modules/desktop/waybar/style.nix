@@ -1,111 +1,79 @@
-{ lib, ... }:
-
-{
-  options.services.waybar.css = lib.mkOption {
-    type = lib.types.str;
-    description = "Waybar CSS theme.";
-    default = ''
-* {
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-}
-
-#waybar {
-    background-color: #333333;
-    color: #ffffff;
-}
-
-button {
-    box-shadow: inset 0 -3px transparent;
+''
+  * {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
     border: none;
-    border-radius: 0;
-    padding: 0 5px;
-}
+    margin: 0;
+    padding: 0;
+  }
 
-#workspaces button {
-    background-color: #5f676a;
+  window#waybar {
+    background-color: rgba(30, 30, 30, 0.95);
     color: #ffffff;
-}
+    border-bottom: 2px solid #5e81ac;
+  }
 
-#workspaces button:hover {
-    background: rgba(0,0,0,0.2);
-}
+  #workspaces button {
+    padding: 0 10px;
+    color: #888;
+    background: transparent;
+  }
 
-#workspaces button.focused {
-    background-color: #285577;
-}
+  #workspaces button.focused {
+    color: #fff;
+    background-color: #5e81ac;
+    border-radius: 6px;
+  }
 
-#workspaces button.urgent {
-    background-color: #900000;
-}
+  #clock,
+  #cpu,
+  #memory,
+  #battery,
+  #pulseaudio,
+  #network,
+  #tray {
+    padding: 0 10px;
+    margin: 0 4px;
+    background-color: #3b4252;
+    border-radius: 5px;
+  }
 
-#workspaces button.active {
-    background-color: #285577;
-}
+  #battery {
+    color: #a3be8c;
+  }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#pulseaudio,
-#tray,
-#mode,
-#idle_inhibitor,
-#window,
-#workspaces {
-    margin: 0 5px;
-}
+  #battery.warning {
+    color: #ebcb8b;
+  }
 
+  #battery.critical {
+    color: #bf616a;
+  }
 
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
+  #network.disconnected {
+    color: #bf616a;
+  }
 
+  #pulseaudio.muted {
+    color: #888;
+  }
 
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
+  tooltip {
+    background-color: #2e3440;
     color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
+    border-radius: 4px;
+    padding: 8px;
+  }
 
-label:focus {
-    background-color: #000000;
-}
+  #custom-power {
+    color: #bf616a;
+    padding: 0 10px;
+    font-size: 16px;
+  }
 
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
+  #custom-power:hover {
+    background-color: #3b4252;
+    border-radius: 5px;
+  }
 
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-    font-size: 15px;
-    background-color: #333333;
-    padding: 5px;
-}
-
-#idle_inhibitor.activated {
-    background-color: #285577;
-}
-
-    '';
-  };
-}
+''

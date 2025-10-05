@@ -1,0 +1,36 @@
+* {
+  font: "JetBrainsMono Nerd Font 14";
+  background: #2e3440;
+  background-alt: #3b4252;
+  foreground: #d8dee9;
+  selected-normal-background: #5e81ac;
+  selected-normal-foreground: #eceff4;
+  border: 0;
+  padding: 8px;
+  margin: 4px;
+  border-radius: 6px;
+}
+
+window {
+  background: @background;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+listview {
+  lines: 5;
+  fixed-height: false;
+  spacing: 10px;
+}
+
+element {
+  background: @background;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+element selected {
+  background: @selected-normal-background;
+  color: @selected-normal-foreground;
+}

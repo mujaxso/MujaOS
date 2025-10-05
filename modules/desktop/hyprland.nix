@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     hyprland
     xdg-desktop-portal-hyprland
-
+    hyprlock
   ];
 
   #home-manager.users.mujaxso = {
