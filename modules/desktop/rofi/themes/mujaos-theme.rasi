@@ -1,5 +1,5 @@
 * {
-    font:   "Montserrat 12";
+    font:   "Ubuntu Nerd Font 12";
 
     bg0:     #1E1E2ECC;   /* Darker, semi-transparent background */
     bg1:     #373758CC;   /* Slightly lighter dark for borders etc */
@@ -26,7 +26,7 @@ window {
 }
 
 inputbar {
-    font:       "Montserrat 20";
+    font:       "Ubuntu Nerd Font 20";
     padding:    12px;
     spacing:    12px;
     children:   [ icon-search, entry ];

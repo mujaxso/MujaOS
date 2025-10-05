@@ -53,7 +53,7 @@
     [Settings]
     gtk-theme-name = Materia-dark
     gtk-icon-theme-name = Papirus-Dark
-    gtk-cursor-theme-name = Adwaita
+    gtk-cursor-theme-name = Bibata-Modern-Ice
     gtk-font-name = Cantarell 11
     gtk-application-prefer-dark-theme=true
     gtk-font-name=FiraCode Retina
