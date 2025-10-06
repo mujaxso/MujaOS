@@ -3,7 +3,7 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
+    ./hardware.nix
     # ../../core/nix.nix
     # ../../core/users.nix
     ../../core/core.nix
@@ -68,18 +68,6 @@
   };
   
   services.dbus.enable = true;
-
-  # programs.hyprland = {
-  #   enable = true;
-
-  # };
-
-  # programs.waybar = {
-  #   enable = true;
-
-  # };
-  
-  #services.waybar.enable = true;
 
   environment.systemPackages = with pkgs; [
     libllvm
