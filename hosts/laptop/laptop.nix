@@ -4,14 +4,9 @@
 {
   imports = [
     ./hardware.nix
-    # ../../core/nix.nix
     # ../../core/users.nix
     ../../core/core.nix
-    # ../../modules/desktop/hyprland.nix
-    # ../../modules/desktop/waybar.nix
-    # ../../modules/desktop/kitty.nix
-    ../../modules/desktop/sddm.nix
-    
+    ../../modules/desktop/sddm.nix    
     ../../modules/system/system.nix
   ];
 
@@ -70,6 +65,7 @@
   services.dbus.enable = true;
 
   environment.systemPackages = with pkgs; [
+    git
     libllvm
     clang
     cmake
