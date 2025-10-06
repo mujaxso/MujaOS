@@ -4,10 +4,15 @@ let
   waybarConfig = import ./config.nix;
   waybarStyle = import ./style.nix;
 in {
+
+  home.packages = with pkgs; [
+    #waybar
+  ];
+
   programs.waybar = {
-    #enable = true;
+    enable = true;
     package = pkgs.waybar;
-    systemd.enable = true;
+    #systemd.enable = true;
     settings = waybarConfig;
     style = waybarStyle;
   };

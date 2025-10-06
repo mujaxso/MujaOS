@@ -48,7 +48,6 @@
   #   device = "/dev/sda"; # or your actual disk (e.g. /dev/nvme0n1)
   #   useOSProber = true; # optional, if you dual boot
   # };
-
   
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -63,7 +62,7 @@
   };
   
   services.dbus.enable = true;
-
+  
   environment.systemPackages = with pkgs; [
     git
     libllvm
