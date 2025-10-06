@@ -1,0 +1,50 @@
+# === Nix build artifacts ===
+/result
+/result-*
+/nix
+/.direnv/
+/.envrc
+
+# === Nix garbage ===
+*.drv
+*.lock
+*.gc
+*.tmp
+*.swp
+
+# === Flake lock file (optional) ===
+# Remove this line **only** if you want to commit `flake.lock`
+#flake.lock
+
+# === Secrets / dotenv files ===
+.env
+.env.*
+*.env
+*.key
+*.pem
+
+# === Editor/OS specific ===
+*.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.bak
+
+# === Python stuff (if using virtualenvs for tools like aider) ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+*.egg-info/
+
+# === Home Manager caches ===
+.home-manager-generation
+
+# === Logs ===
+*.log
+.aider*

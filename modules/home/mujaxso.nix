@@ -1,25 +1,33 @@
-{ config, pkgs, lib,... }:
-{
+{ config, pkgs, lib, ... }:
+
+let
+  username = "mujaxso";
+  homeDir = "/home/${username}";
+
   imports = [
     ../desktop/desktop.nix
     ../programs/programs.nix
-    #../desktop/gtk.nix
+    ../ai/ai.nix
   ];
-  
-  home.username = "mujaxso";
-  home.homeDirectory = "/home/mujaxso";
+in {
+  inherit imports;
+
+  home.username = username;
+  home.homeDirectory = homeDir;
+
   home.sessionVariables = {
-    #GTK_THEME = "Materia-dark";
-    XDG_CONFIG_HOME = lib.mkForce "${config.home.homeDirectory}/.config";
+    # GTK_THEME = "Materia-dark";
+    XDG_CONFIG_HOME = lib.mkForce "${homeDir}/.config";
+    EDITOR = "nvim";
   };
+
   xdg.enable = true;
 
   programs.home-manager.enable = true;
-  
-  # REQUIRED!
-  home.stateVersion = "25.05"; # pick your NixOS version
 
-  
+  # REQUIRED!
+  home.stateVersion = "25.05";
+
   home.packages = with pkgs; [
     grim
     slurp
@@ -29,7 +37,6 @@
     cliphist
     tree
     unzip
-    # nix lsp
     nil
     eza
     fastfetch
