@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  # 🪐 Astronaut SDDM Theme (with variant override)
   sddmAstronaut = pkgs.stdenv.mkDerivation {
     pname = "sddm-astronaut-theme";
     version = "unstable";
@@ -17,20 +18,24 @@ let
     installPhase = ''
       mkdir -p $out/share/sddm/themes/sddm-astronaut-theme
       cp -r * $out/share/sddm/themes/sddm-astronaut-theme
+
+      # ✅ Optional variant (Cyberpunk, Nord, TokyoNight, etc.)
+      cat > $out/share/sddm/themes/sddm-astronaut-theme/theme.conf.user <<EOF
+      [General]
+      theme=Cyberpunk
+      EOF
     '';
   };
 in
 {
-  # Enable X server
+  # 🖥️ Enable X server (needed for SDDM)
   services.xserver.enable = true;
 
-  # Enable SDDM and set Astronaut as default theme
+  # 🚀 Configure SDDM
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "sddm-astronaut-theme";
-
-    # Provide Qt libraries SDDM needs to run the Astronaut theme
+    theme = "sddm-astronaut-theme"; # default theme
     extraPackages = with pkgs.qt6; [
       qtbase
       qtdeclarative
@@ -39,10 +44,10 @@ in
     ];
   };
 
-  # Hyprland session
+  # 🌈 Add Hyprland sessions
   services.displayManager.sessionPackages = [ pkgs.hyprland ];
 
-  # Install both themes
+  # 📦 Install Astronaut + Catppuccin themes
   environment.systemPackages = with pkgs; [
     sddmAstronaut
 
