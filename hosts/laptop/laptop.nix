@@ -67,6 +67,7 @@
     git
     libllvm
     clang
+    clang-tools
     cmake
     gnumake
     libtool

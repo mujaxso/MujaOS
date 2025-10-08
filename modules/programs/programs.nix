@@ -4,7 +4,7 @@
   imports = [
     ./git.nix
     ./emacs.nix
-    ./brave.nix
+    ./browser/browser.nix
     ./vscode.nix
   ];
 
