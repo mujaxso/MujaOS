@@ -9,6 +9,7 @@
     ../../modules/desktop/sddm/sddm.nix
     #../../modules/desktop/light.nix
     ../../modules/system/system.nix
+    ../../modules/lang/lang.nix
   ];
 
   # Define your hostname.
@@ -65,14 +66,6 @@
   
   environment.systemPackages = with pkgs; [
     git
-    libllvm
-    clang
-    clang-tools
-    cmake
-    gnumake
-    libtool
-    libvterm
-    glibtool
     neovim
     wget
 

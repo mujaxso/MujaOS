@@ -7,6 +7,7 @@ let
   imports = [
     ../desktop/desktop.nix
     ../programs/programs.nix
+    #../lang/lang.nix
     ../ai/ai.nix
   ];
 in {
