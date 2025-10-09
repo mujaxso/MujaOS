@@ -9,7 +9,6 @@ let
   gtk = ./gtk.nix;
   kitty = ./kitty.nix;
   cursor = ./cursor.nix;
-  # pipewire = ./pipewire.nix;
 in {
   imports = [
     hyprland
@@ -19,6 +18,5 @@ in {
     gtk
     kitty
     cursor
-    # pipewire
   ];
 }

@@ -45,5 +45,6 @@ in {
     btop
     alacritty
     pcmanfm
+    brightnessctl
   ];
 }
