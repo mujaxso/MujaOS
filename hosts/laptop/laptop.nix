@@ -69,6 +69,7 @@
     neovim
     wget
     zip
+    playerctl
 
   ];
 
