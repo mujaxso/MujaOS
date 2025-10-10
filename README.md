@@ -30,5 +30,6 @@ Before using this configuration, ensure you have:
 1. **Clone this repository**:
 
    ```bash
-   git clone https://github.com/mujahid-siyam/mujaxso.git
-   cd mujaxso
+   git clone https://github.com/mujaxso/mujaos.git
+   cd mujaos
+   sudo nixos-rebuild switch --flake .#laptop --show-trace
