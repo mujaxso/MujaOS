@@ -68,6 +68,7 @@
     git
     neovim
     wget
+    zip
 
   ];
 

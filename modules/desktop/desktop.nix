@@ -7,7 +7,6 @@ let
   waybar = ./waybar/waybar.nix;
   rofi = ./rofi/rofi.nix;
   gtk = ./gtk.nix;
-  kitty = ./kitty.nix;
   cursor = ./cursor.nix;
 in {
   imports = [
@@ -16,7 +15,6 @@ in {
     waybar
     rofi
     gtk
-    kitty
     cursor
   ];
 }

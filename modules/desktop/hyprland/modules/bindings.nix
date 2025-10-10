@@ -1,6 +1,6 @@
 {
   bind = [
-    "$modifier,Return,exec,kitty"
+    "$modifier,Return,exec,ghostty"
     "$modifier,K,exec,list-keybinds"
     "$modifier ,R,exec,rofi-launcher"
     "$modifier,Space,exec,rofi -show drun"
