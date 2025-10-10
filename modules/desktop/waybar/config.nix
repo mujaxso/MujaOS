@@ -23,9 +23,10 @@
       "network"
       "cpu"
       "memory"
+      "custom/notification"
       "battery"
       "clock"
-      "custom/power"
+      "custom/exit"
     ];
 
     clock = {
@@ -75,6 +76,50 @@
       on-click = "~/.config/waybar/scripts/power-menu.sh";
     };
 
+    "custom/exit" = {
+      tooltip = false;
+      format = "";
+      on-click = "sleep 0.1 && wlogout";
+    };
+
+    # "custom/notification" = {
+    #   tooltip = false;
+    #   format = "{icon}";
+    #   #format = "  󰂚 󱅫 ";
+    #   #format-icons = {};
+    #   format-icons = {
+    #     notification = "󰂚";
+    #     none = "󱅫";
+    #   };
+    #   return-type = "json";
+    #   exec-if = "which dunstctl";
+    #   exec = "~/.config/waybar/scripts/dunst-waybar.sh";
+    #   on-click = "dunstctl history-pop";
+    #   on-click-right = "dunstctl close-all";
+    #   signal = 8;
+    #   escape = true;
+    # };
+
+    "custom/notification" = {
+      tooltip = false;
+      format = "{icon} {}";
+      format-icons = {
+        notification = "<span foreground='red'><sup></sup></span>";
+        none = "";
+        dnd-notification = "<span foreground='red'><sup></sup></span>";
+        dnd-none = "";
+        inhibited-notification = "<span foreground='red'><sup></sup></span>";
+        inhibited-none = "";
+        dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
+        dnd-inhibited-none = "";
+      };
+      return-type = "json";
+      exec-if = "which swaync-client";
+      exec = "swaync-client -swb";
+      on-click = "sleep 0.1 && task-waybar";
+      escape = true;
+    };
+
     "hyprland/workspaces" = {
       format = "{icon}";  # or "{id}" or "{name} {icon}" etc.
       format-icons = {
@@ -95,5 +140,20 @@
       max-length = 20;
       separate-outputs = true;
     };
+
+    "custom/playerctl" = {
+      format = "{icon}  <span>{}</span>";
+      "return-type" = "json";
+      "max-length" = 333;
+      exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} ~ {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+      "on-click-middle" = "playerctl play-pause";
+      "on-click" = "playerctl previous";
+      "on-click-right" = "playerctl next";
+      "format-icons" = {
+        Playing = "<span foreground='#98BB6C'></span>";
+        Paused = "<span foreground='#E46876'></span>";
+      };
+    };
+
   };
 }

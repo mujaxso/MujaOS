@@ -8,6 +8,8 @@ let
   rofi = ./rofi/rofi.nix;
   gtk = ./gtk.nix;
   cursor = ./cursor.nix;
+  dunst = ./dunst.nix;
+  wlogout = ./wlogout.nix;
 in {
   imports = [
     hyprland
@@ -16,5 +18,7 @@ in {
     rofi
     gtk
     cursor
+    dunst
+    wlogout
   ];
 }

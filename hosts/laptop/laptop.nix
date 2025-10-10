@@ -63,14 +63,20 @@
   };
   
   services.dbus.enable = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+    persistent = true;
+    randomizedDelaySec = "45min"; 
+  };
   
   environment.systemPackages = with pkgs; [
     git
     neovim
     wget
     zip
-    playerctl
-
   ];
 
   system.stateVersion = "25.05";
