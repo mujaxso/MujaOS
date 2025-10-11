@@ -13,6 +13,19 @@
         edit = [
           { run = "nvim \"$@\""; block = true; }
         ];
+        image = [
+          {
+            run = ''feh --scale-down --auto-zoom "$@"'';
+            orphan = true;
+            desc = "View with feh";
+          }
+        ];
+      };
+      
+      open = {
+        prepend_rules = [
+          { mime = "image/*"; use = "image"; }
+        ];
       };
     };
     

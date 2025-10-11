@@ -5,7 +5,8 @@ let
   terminals = ./terminals/terminals.nix;
   browsers = ./browsers/browsers.nix;
   yazi = ./yazi.nix;
-  in
+  feh = ./feh.nix;
+in
 {
   imports = [
     git
@@ -13,6 +14,7 @@ let
     terminals
     browsers
     yazi
+    feh
   ];
 
   home.packages = with pkgs; [
