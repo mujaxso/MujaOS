@@ -7,9 +7,14 @@ with pkgs; [
   hyprpaper
   #wlogout
   playerctl
+
+  grim          # Screenshot tool
+  slurp         # Region selector
+  wl-clipboard  # Clipboard support
+  grimblast     # Hyprland screenshot utility
   
-  dunst
-  libnotify
+  dunst         #
+  libnotify     # Notifications
   swaynotificationcenter
 
 ]

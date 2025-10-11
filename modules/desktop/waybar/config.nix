@@ -11,13 +11,15 @@
     "modules-left" = [
       "hyprland/workspaces"
       "hyprland/mode"
-    ];
-    
-    "modules-center" = [
       "hyprland/window"
     ];
     
+    "modules-center" = [
+      "clock"
+    ];
+    
     "modules-right" = [
+      "custom/playerctl"
       "pulseaudio"
       "tray"
       "network"
@@ -25,14 +27,16 @@
       "memory"
       "custom/notification"
       "battery"
-      "clock"
+      
       "custom/exit"
     ];
 
     clock = {
       interval = 30;
-      format = "{:%H:%M}";
+      format = " {:L%H:%M}";
       on-click = "gsimplecal";
+      tooltip = true;
+      tooltip-format = "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
     };
 
     battery = {
@@ -121,11 +125,17 @@
     };
 
     "hyprland/workspaces" = {
-      format = "{icon}";  # or "{id}" or "{name} {icon}" etc.
+      format = "{icon}";  # or "{id}" or "{name} {icon}" etc
       format-icons = {
         "1" = "󰖟";
         "2" = "";
         "3" = "";
+        "4" = "";
+        "5" = "";
+        "6" = "";
+        "7" = "󰇮";
+        "8" = "󰕧";
+        "9" = "";     
       };
       sort-by-number = true;
       all-outputs = true;
@@ -139,6 +149,9 @@
       expand = true;
       max-length = 20;
       separate-outputs = true;
+      rewrite = {
+        "" = " 🙈 No Windows? ";
+      };
     };
 
     "custom/playerctl" = {
@@ -154,6 +167,5 @@
         Paused = "<span foreground='#E46876'></span>";
       };
     };
-
   };
 }
