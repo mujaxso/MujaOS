@@ -12,6 +12,9 @@
         rust-lang.rust-analyzer
         bbenoist.nix
         pkief.material-icon-theme
+        ziglang.vscode-zig
+        catppuccin.catppuccin-vsc
+        formulahendry.code-runner
       ];
 
       userSettings = {
@@ -20,6 +23,8 @@
         "editor.tabSize" = 4;
         "files.autoSave" = "onFocusChange";
         "workbench.iconTheme" = "material-icon-theme";
+        "workbench.colorTheme" = "Catppuccin Mocha";
+        "zig.zls.enabled" = "on";
       };
     };
   };
