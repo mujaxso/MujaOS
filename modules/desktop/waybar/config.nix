@@ -26,8 +26,7 @@
       "cpu"
       "memory"
       "custom/notification"
-      "battery"
-      
+      "battery"      
       "custom/exit"
     ];
 
@@ -53,6 +52,7 @@
     pulseaudio = {
       format = "{volume}% {icon}";
       format-icons = [ "" "" "" ];
+      on-click = "pavucontrol";
     };
 
     memory = {
@@ -63,7 +63,7 @@
     };
 
     cpu = {
-      format = "   {}%";
+      format = "  {}%";
       format-alt = "{usage}% ";
       tooltip = false;
     };
@@ -106,7 +106,7 @@
 
     "custom/notification" = {
       tooltip = false;
-      format = "{icon} {}";
+      format = "{} {icon}";
       format-icons = {
         notification = "<span foreground='red'><sup></sup></span>";
         none = "";
@@ -120,7 +120,8 @@
       return-type = "json";
       exec-if = "which swaync-client";
       exec = "swaync-client -swb";
-      on-click = "sleep 0.1 && task-waybar";
+      # on-click = "sleep 0.1 && task-waybar";
+      on-click = "sleep 0.1 && swaync-client -t";
       escape = true;
     };
 

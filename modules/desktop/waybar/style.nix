@@ -41,6 +41,10 @@
     font-weight: 600;
 }
 
+#custom-notification {
+  font-family: "JetBrainsMono Nerd Font";
+}
+
 /* Optional separator */
 #waybar .separator {
     margin: 0 8px;

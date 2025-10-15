@@ -8,7 +8,7 @@ let
   rofi = ./rofi/rofi.nix;
   gtk = ./gtk.nix;
   cursor = ./cursor.nix;
-  dunst = ./dunst.nix;
+  # dunst = ./dunst.nix;
   wlogout = ./wlogout.nix;
 in {
   imports = [
@@ -18,7 +18,7 @@ in {
     rofi
     gtk
     cursor
-    dunst
+    # dunst
     wlogout
   ];
 }

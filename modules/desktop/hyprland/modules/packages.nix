@@ -12,6 +12,7 @@ with pkgs; [
   slurp         # Region selector
   wl-clipboard  # Clipboard support
   grimblast     # Hyprland screenshot utility
+  pavucontrol   # audio control
   
   dunst         #
   libnotify     # Notifications
