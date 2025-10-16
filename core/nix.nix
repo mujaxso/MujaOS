@@ -2,5 +2,12 @@
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  programs.zsh.enable = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+    persistent = true;
+    randomizedDelaySec = "45min"; 
+  };
 }

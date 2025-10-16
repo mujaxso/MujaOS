@@ -7,6 +7,7 @@
     # ../../core/users.nix
     ../../core/core.nix
     ../../modules/desktop/sddm/sddm.nix
+    # ../../modules/desktop/suckelss/suckless.nix
     #../../modules/desktop/light.nix
     ../../modules/system/system.nix
     ../../modules/lang/lang.nix
@@ -54,24 +55,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   # Make sure GRUB is OFF
   boot.loader.grub.enable = false;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-  
-  services.dbus.enable = true;
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-    persistent = true;
-    randomizedDelaySec = "45min"; 
-  };
-  
+ 
   environment.systemPackages = with pkgs; [
     git
     neovim

@@ -1,12 +1,18 @@
 { config, pkgs, ... }:
 
+let
+  shells = ./shells/shells.nix;
+  fonts = ./fonts.nix;
+  users = ./users.nix;
+  nix = ./nix.nix;
+  services = ./services.nix;
+in
 {
   imports = [
-    ./fonts.nix
-    ./nix.nix
-    ./users.nix
-    ./shells/shells.nix
-    
+    shells
+    fonts
+    users
+    nix
+    services
   ];
-
 }
