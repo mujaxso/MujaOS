@@ -7,6 +7,7 @@ let
   yazi = ./yazi.nix;
   feh = ./feh.nix;
   obs = ./obs.nix;
+  mpv = ./mpv.nix;
 in
 {
   imports = [
@@ -17,6 +18,7 @@ in
     yazi
     feh
     obs
+    mpv
   ];
 
   home.packages = with pkgs; [
