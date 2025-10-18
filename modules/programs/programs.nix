@@ -6,6 +6,7 @@ let
   browsers = ./browsers/browsers.nix;
   yazi = ./yazi.nix;
   feh = ./feh.nix;
+  obs = ./obs.nix;
 in
 {
   imports = [
@@ -15,6 +16,7 @@ in
     browsers
     yazi
     feh
+    obs
   ];
 
   home.packages = with pkgs; [
