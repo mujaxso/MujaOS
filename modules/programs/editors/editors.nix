@@ -2,10 +2,12 @@
 let
   emacs = ./emacs.nix;
   vscode = ./vscode.nix;
-  in
+  zed = ./zed.nix;
+in
 {
   imports = [
     emacs
     vscode
+    zed
   ];
 }
