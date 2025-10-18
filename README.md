@@ -1,7 +1,6 @@
 # MujaOS — Modular NixOS Configuration
 
-This repository contains a **NixOS configuration** managed with flakes.  
-It provides a reproducible and declarative setup for building and managing NixOS systems.
+**NixOS done right.** This flake-based configuration gives you declarative system management with bulletproof reproducibility. Clone it, build it, and get the exact same system every time—no surprises, no drift, no fragile scripts. Organized modularly so you can customize without breaking everything.
 
 ---
 
