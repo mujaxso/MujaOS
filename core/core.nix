@@ -6,6 +6,7 @@ let
   users = ./users.nix;
   nix = ./nix.nix;
   services = ./services.nix;
+  security = ./security.nix;
 in
 {
   imports = [
@@ -14,5 +15,6 @@ in
     users
     nix
     services
+    security
   ];
 }

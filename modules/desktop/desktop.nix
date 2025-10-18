@@ -11,6 +11,7 @@ let
   cursor = ./cursor.nix;
   # dunst = ./dunst.nix;
   wlogout = ./wlogout.nix;
+  xdg = ./xdg.nix;
 in {
   imports = [
     hyprland
@@ -22,5 +23,6 @@ in {
     cursor
     # dunst
     wlogout
+    xdg
   ];
 }

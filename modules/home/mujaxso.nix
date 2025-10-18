@@ -13,17 +13,21 @@ let
 in {
   inherit imports;
 
-  home.username = username;
-  home.homeDirectory = homeDir;
+  home = {
+    username = username;
+    homeDirectory = homeDir;
 
-  home.sessionVariables = {
+    sessionVariables = {
     # GTK_THEME = "Materia-dark";
     XDG_CONFIG_HOME = lib.mkForce "${homeDir}/.config";
     EDITOR = "nvim";
+    MOZ_ENABLE_WAYLAND = "1";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+    };
+
   };
 
-  xdg.enable = true;
-  
   programs.home-manager.enable = true;
 
   # REQUIRED!

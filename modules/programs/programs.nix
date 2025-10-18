@@ -6,6 +6,7 @@ let
   browsers = ./browsers/browsers.nix;
   videos = ./videos/videos.nix;
   yazi = ./yazi.nix;
+  thunar = ./thunar.nix;
   feh = ./feh.nix;
 in
 {
@@ -16,6 +17,7 @@ in
     browsers
     videos
     yazi
+    # thunar
     feh
   ];
 

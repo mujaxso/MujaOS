@@ -2,7 +2,7 @@
 
 with pkgs; [
   hyprland
-  xdg-desktop-portal-hyprland
+  # xdg-desktop-portal-hyprland
   hyprlock
   hyprpaper
   #wlogout
@@ -17,5 +17,7 @@ with pkgs; [
   dunst         #
   libnotify     # Notifications
   swaynotificationcenter
+
+  kdePackages.xwaylandvideobridge  # Enables screen sharing for Discord/Skype
 
 ]

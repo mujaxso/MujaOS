@@ -11,6 +11,8 @@
     #../../modules/desktop/light.nix
     ../../modules/system/system.nix
     ../../modules/lang/lang.nix
+    # ../../modules/desktop/xdg.nix
+    ../../modules/programs/thunar.nix
   ];
 
   # Define your hostname.
