@@ -4,10 +4,9 @@ let
   editors = ./editors/editors.nix;
   terminals = ./terminals/terminals.nix;
   browsers = ./browsers/browsers.nix;
+  videos = ./videos/videos.nix;
   yazi = ./yazi.nix;
   feh = ./feh.nix;
-  obs = ./obs.nix;
-  mpv = ./mpv.nix;
 in
 {
   imports = [
@@ -15,14 +14,12 @@ in
     editors
     terminals
     browsers
+    videos
     yazi
     feh
-    obs
-    mpv
   ];
 
   home.packages = with pkgs; [
-    ffmpeg
     p7zip
     jq
     poppler
