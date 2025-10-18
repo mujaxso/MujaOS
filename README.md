@@ -5,6 +5,10 @@ It provides a reproducible and declarative setup for building and managing NixOS
 
 ---
 
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <div><img src="https://raw.githubusercontent.com/mujaxso/mujaos/main/assets/img/mujaos.png" alt="MujaOS Logo" ><br></div>
+</div>
+
 ## 🚀 Features
 
 - Declarative and reproducible NixOS setup  
