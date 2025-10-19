@@ -4,6 +4,7 @@
   ...
 }: let
   git = ./git.nix;
+  gpg = ./gpg.nix;
   editors = ./editors/editors.nix;
   terminals = ./terminals/terminals.nix;
   browsers = ./browsers/browsers.nix;
@@ -14,6 +15,7 @@
 in {
   imports = [
     git
+    # gpg
     editors
     terminals
     browsers

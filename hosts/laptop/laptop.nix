@@ -14,6 +14,7 @@
     ../../modules/lang/lang.nix
     # ../../modules/desktop/xdg.nix
     ../../modules/programs/thunar.nix
+    # ../../modules/programs/gpg.nix
   ];
 
   # Define your hostname.
