@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   git = ./git.nix;
   editors = ./editors/editors.nix;
   terminals = ./terminals/terminals.nix;
@@ -8,8 +11,7 @@ let
   yazi = ./yazi.nix;
   thunar = ./thunar.nix;
   feh = ./feh.nix;
-in
-{
+in {
   imports = [
     git
     editors
@@ -31,6 +33,8 @@ in
     zoxide
     resvg
     imagemagick
+    wf-recorder
+    # Kooha
+    #Wayfarer
   ];
-
 }

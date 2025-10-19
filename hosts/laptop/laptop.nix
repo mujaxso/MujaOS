@@ -1,7 +1,8 @@
-
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware.nix
     # ../../core/users.nix
@@ -16,8 +17,8 @@
   ];
 
   # Define your hostname.
-  networking.hostName = "laptop"; 
-  
+  networking.hostName = "laptop";
+
   # Enable networking
   networking.networkmanager.enable = true;
   # networking.networkmanager.enable = true;
@@ -52,12 +53,14 @@
   #   device = "/dev/sda"; # or your actual disk (e.g. /dev/nvme0n1)
   #   useOSProber = true; # optional, if you dual boot
   # };
-  
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # Make sure GRUB is OFF
   boot.loader.grub.enable = false;
- 
+
+  xdg.portal.wlr.enable = false;
+
   environment.systemPackages = with pkgs; [
     git
     neovim

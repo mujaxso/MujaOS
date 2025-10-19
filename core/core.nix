@@ -1,14 +1,16 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   shells = ./shells/shells.nix;
   fonts = ./fonts.nix;
   users = ./users.nix;
   nix = ./nix.nix;
   services = ./services.nix;
   security = ./security.nix;
-in
-{
+  systemd = ./systemd.nix;
+in {
   imports = [
     shells
     fonts
@@ -16,5 +18,6 @@ in
     nix
     services
     security
+    systemd
   ];
 }

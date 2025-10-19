@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   xdg = {
     enable = true;
     # xdgOpenUsePortal = true;
@@ -10,7 +12,7 @@
       enable = true;
       createDirectories = true;
     };
-    
+
     # # XDG mime types (optional)
     # mimeApps = {
     #   enable = true;
@@ -25,23 +27,21 @@
     #     "inode/directory" = "yazi.desktop";
     #   };
     # };
-    
-    portal = {
-      enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-hyprland  # Primary portal
-        pkgs.xdg-desktop-portal-gtk       # Fallback for file pickers
-      ];
-      config = {
-        common = {
-          default = [ "hyprland" "gtk" ];
-        };
-        hyprland = {
-          default = [ "hyprland" "gtk" ];
-          "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
-          "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
-        };
-      };
-    };
+
+    # portal = {
+    #   enable = true;
+    #   # wlr.enable = false;
+    #   extraPortals = with pkgs; [
+    #     xdg-desktop-portal-hyprland
+    #     xdg-desktop-portal-gtk
+    #   ];
+    #   config = {
+    #     common.default = ["hyprland" "gtk"];
+    #     hyprland = {
+    #       "org.freedesktop.impl.portal.ScreenCast" = ["hyprland"];
+    #       "org.freedesktop.impl.portal.Screenshot" = ["hyprland"];
+    #     };
+    #   };
+    # };
   };
 }

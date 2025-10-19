@@ -1,12 +1,15 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   modulesDir = ./modules;
 
-  packages = import (modulesDir + "/packages.nix") { inherit pkgs; };
+  packages = import (modulesDir + "/packages.nix") {inherit pkgs;};
   bindings = import (modulesDir + "/bindings.nix");
   input = import (modulesDir + "/input.nix");
   general = import (modulesDir + "/general.nix");
+  env = import (modulesDir + "/env.nix");
   animations = import (modulesDir + "/animations.nix");
   decoration = import (modulesDir + "/decoration.nix");
   dwindle = import (modulesDir + "/dwindle.nix");
@@ -20,6 +23,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
     extraConfig = ''
       exec-once = hyprland --config /etc/hypr/hyprland.conf
     '';
@@ -30,6 +34,7 @@ in {
       inherit (bindings) bind bindm;
       input = input;
       general = general;
+      env = env;
       animations = animations;
       decoration = decoration;
       dwindle = dwindle;
