@@ -1,7 +1,6 @@
-{ pkgs, ...}:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
-    davinci-resolve    
+    davinci-resolve
   ];
 
   xdg.desktopEntries.davinci-resolve = {
@@ -11,7 +10,7 @@
     icon = "davinci-resolve";
     type = "Application";
     terminal = false;
-    categories = [ "AudioVideo" "VideoEditing" ];
+    categories = ["AudioVideo" "VideoEditing"];
     comment = "Professional video editing software";
   };
 }

@@ -1,9 +1,7 @@
-{ pkgs, ...}:
-let
+{pkgs, ...}: let
   ghostty = ./ghostty.nix;
   kitty = ./kitty.nix;
-in
-{
+in {
   imports = [
     ghostty
     kitty

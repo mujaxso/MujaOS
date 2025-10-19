@@ -1,8 +1,7 @@
-{ pkgs, ...}:
-{
+{pkgs, ...}: {
   programs.feh = {
     enable = true;
-    
+
     themes = {
       wallpaper = [
         "--bg-fill"

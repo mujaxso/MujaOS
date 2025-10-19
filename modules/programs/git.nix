@@ -1,12 +1,16 @@
-{ config, pkgs,lib, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = with pkgs; [
     lazygit
   ];
-  
+
   programs.git = {
     enable = true;
-    userName  = "Mujahid Siyam";
+    userName = "Mujahid Siyam";
     userEmail = "mujaxso@proton.me";
     signing = {
       key = "~/.ssh/id_ed25519.pub";
@@ -46,4 +50,3 @@
     ];
   };
 }
-

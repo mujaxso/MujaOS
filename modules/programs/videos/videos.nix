@@ -1,12 +1,14 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   ffmpeg = ./ffmpeg.nix;
   obs = ./obs.nix;
   davinci-resolve = ./davinci-resolve.nix;
   kdenlive = ./kdenlive.nix;
   mpv = ./mpv.nix;
-in
-{
+in {
   imports = [
     ffmpeg
     obs

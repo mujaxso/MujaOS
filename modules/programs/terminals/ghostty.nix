@@ -1,11 +1,13 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     ghostty
   ];
 
-  programs.ghostty =  {
+  programs.ghostty = {
     enable = true;
     settings = {
       theme = "Argonaut";

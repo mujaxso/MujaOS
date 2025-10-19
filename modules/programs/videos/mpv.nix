@@ -1,8 +1,7 @@
-{ pkgs, ...}:
-{
+{pkgs, ...}: {
   programs.mpv = {
     enable = true;
-    
+
     package = (
       pkgs.mpv-unwrapped.wrapper {
         scripts = with pkgs.mpvScripts; [
@@ -14,7 +13,7 @@
         };
       }
     );
-    
+
     config = {
       profile = "high-quality";
       ytdl-format = "bestvideo+bestaudio";

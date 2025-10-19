@@ -1,17 +1,19 @@
-{ pkgs, ...}:
-{
+{pkgs, ...}: {
   programs.yazi = {
     enable = true;
-    
+
     settings = {
       mgr = {
         show_hidden = true;
         sort_by = "natural";
       };
-      
+
       opener = {
         edit = [
-          { run = "nvim \"$@\""; block = true; }
+          {
+            run = "nvim \"$@\"";
+            block = true;
+          }
         ];
         image = [
           {
@@ -21,19 +23,31 @@
           }
         ];
       };
-      
+
       open = {
         prepend_rules = [
-          { mime = "image/*"; use = "image"; }
+          {
+            mime = "image/*";
+            use = "image";
+          }
         ];
       };
     };
-    
+
     keymap = {
       mgr.prepend_keymap = [
-        { run = "close"; on = [ "<C-q>" ]; }
-        { run = "yank --cut"; on = [ "d" ]; }
-        { run = "remove --force"; on = [ "D" ]; }
+        {
+          run = "close";
+          on = ["<C-q>"];
+        }
+        {
+          run = "yank --cut";
+          on = ["d"];
+        }
+        {
+          run = "remove --force";
+          on = ["D"];
+        }
       ];
     };
   };
