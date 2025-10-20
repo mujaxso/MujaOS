@@ -1,15 +1,11 @@
-{ pkgs, ...}:
-
-let
+{pkgs, ...}: let
   dwm = ./dwm.nix;
   st = ./st.nix;
   dwmblocks = ./dwmblocks.nix;
-in
-{
+in {
   imports = [
     dwm
-    # st
+    st
     dwmblocks
   ];
-
 }

@@ -5,12 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    agenix,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -35,6 +37,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./modules/home/mujaxso.nix;
           }
+          agenix.nixosModules.default
         ];
       };
     };
@@ -44,7 +47,12 @@
         inherit pkgs;
         system = system;
         username = username;
-        configuration = import ./modules/home/mujaxso.nix;
+        configuration = {
+          imports = [
+            ./modules/home/mujaxso.nix
+            agenix.homeManagerModules.default
+          ];
+        };
       };
     };
   };
