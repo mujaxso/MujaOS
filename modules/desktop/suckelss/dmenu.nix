@@ -4,7 +4,7 @@
       owner = "mujaxso";
       repo = "dmenu";
       rev = "8b48986f4c730725367e2865e5ea24931855018f";
-      hash = "";
+      hash = "sha256-2H/KuFBMazejcUzXU51yrgkqQXoYKI9AlzwX+SbC6sg=";
     };
     # patches = [ ./patches/whatever.diff ];
   });
