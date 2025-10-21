@@ -13,6 +13,7 @@
   python = ./python.nix;
   javascript = ./javascript.nix;
   nodejs = ./nodejs.nix;
+  json = ./json.nix;
   php = ./php.nix;
   ruby = ./ruby.nix;
   dart = ./dart.nix;
@@ -34,6 +35,7 @@ in {
     python
     javascript
     nodejs
+    json
     php
     ruby
     dart

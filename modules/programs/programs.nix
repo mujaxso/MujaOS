@@ -38,5 +38,6 @@ in {
     wf-recorder
     # Kooha
     #Wayfarer
+    pandoc
   ];
 }
