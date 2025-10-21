@@ -20,6 +20,7 @@
   lua = ./lua.nix;
   vlang = ./vlang.nix;
   ocaml = ./ocaml.nix;
+  toml = ./toml.nix;
   terraform = ./terraform.nix;
   latex = ./latex.nix;
 in {
@@ -40,6 +41,7 @@ in {
     lua
     vlang
     ocaml
+    toml
     terraform
     # latex
   ];

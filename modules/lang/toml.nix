@@ -1,7 +1,5 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    go
-    gopls
-    hugo
+    taplo
   ];
 }
