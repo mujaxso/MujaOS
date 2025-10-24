@@ -10,6 +10,7 @@
   services = ./services.nix;
   security = ./security.nix;
   systemd = ./systemd.nix;
+  networking = ./networking.nix;
 in {
   imports = [
     shells
@@ -19,5 +20,6 @@ in {
     services
     security
     systemd
+    networking
   ];
 }
