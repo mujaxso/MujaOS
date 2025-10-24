@@ -17,6 +17,7 @@
   autostart = import (modulesDir + "/autostart.nix");
   monitor = import (modulesDir + "/monitor.nix");
   rules = import (modulesDir + "/rules.nix");
+  layerrule = import (modulesDir + "/layerrule.nix");
 in {
   home.packages = packages;
 
@@ -30,7 +31,6 @@ in {
     settings = {
       monitor = monitor;
       exec-once = autostart;
-
       inherit (bindings) bind bindm;
       input = input;
       general = general;
@@ -40,6 +40,7 @@ in {
       dwindle = dwindle;
       misc = misc;
       rules = rules;
+      layerrule = layerrule;
     };
   };
 }

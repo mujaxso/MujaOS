@@ -1,5 +1,4 @@
-{ pkgs }:
-
+{pkgs}:
 with pkgs; [
   hyprland
   # xdg-desktop-portal-hyprland
@@ -8,16 +7,16 @@ with pkgs; [
   #wlogout
   playerctl
 
-  grim          # Screenshot tool
-  slurp         # Region selector
-  wl-clipboard  # Clipboard support
-  grimblast     # Hyprland screenshot utility
-  pavucontrol   # audio control
-  
-  dunst         #
-  libnotify     # Notifications
+  grim # Screenshot tool
+  slurp # Region selector
+  wl-clipboard # Clipboard support
+  grimblast # Hyprland screenshot utility
+  pavucontrol # audio control
+
+  wlr-randr
+  dunst #
+  libnotify # Notifications
   swaynotificationcenter
 
-  kdePackages.xwaylandvideobridge  # Enables screen sharing for Discord/Skype
-
+  kdePackages.xwaylandvideobridge # Enables screen sharing for Discord/Skype
 ]
