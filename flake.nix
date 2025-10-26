@@ -57,5 +57,11 @@
         };
       };
     };
+
+    # Add packages for easier access in CI
+    packages.${system} = {
+      mujaos = self.nixosConfigurations.laptop.config.system.build.toplevel;
+      default = self.packages.${system}.mujaos;
+    };
   };
 }
