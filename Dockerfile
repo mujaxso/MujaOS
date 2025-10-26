@@ -12,12 +12,12 @@ COPY flake.nix flake.lock ./
 # COPY nix ./nix
 
 # Pre-build to warm caches; this doesn't copy your whole source yet
-# If your package name is "mujaos", adapt the output path as needed
-RUN nix build .#mujaos || true
+# Build the laptop NixOS configuration
+RUN nix build .#nixosConfigurations.laptop.config.system.build.toplevel || true
 
 # Now copy the rest of the source and build for real (cache helps)
 COPY . .
-RUN nix build .#mujaos
+RUN nix build .#nixosConfigurations.laptop.config.system.build.toplevel
 
 # Collect Nix store closure for the build output
 # "result" symlink points to the build output from nix build
