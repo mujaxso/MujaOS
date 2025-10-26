@@ -15,7 +15,6 @@
       - name: Install Nix
         uses: cachix/install-nix-action@v26
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
           extra_nix_config: |
             experimental-features = nix-command flakes
 
@@ -26,12 +25,13 @@
             exit 1
           fi
 
+      - name: Show versions
+        run: |
+          nix flake metadata --json | jq '.locks.nodes | to_entries[] | {name: .key, url: .value.original.url, rev: .value.locked.rev}'
+          
       - name: Build all NixOS configurations
         run: |
           nix build .#nixosConfigurations.laptop.config.system.build.toplevel --print-build-logs
-          nix build .#nixosConfigurations.desktop.config.system.build.toplevel --print-build-logs
-          nix build .#nixosConfigurations.server.config.system.build.toplevel --print-build-logs
-          nix build .#nixosConfigurations.workstation.config.system.build.toplevel --print-build-logs
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
