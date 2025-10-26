@@ -18,5 +18,5 @@ with pkgs; [
   libnotify # Notifications
   swaynotificationcenter
 
-  kdePackages.xwaylandvideobridge # Enables screen sharing for Discord/Skype
+  # kdePackages.xwaylandvideobridge # Enables screen sharing for Discord/Skype - temporarily removed due to missing attribute
 ]
