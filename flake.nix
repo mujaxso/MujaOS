@@ -17,20 +17,20 @@
     agenix,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
+    systems = ["x86_64-linux"];
     username = "mujaxso";
-
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-    };
+    
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        pkgs = pkgs;
+        system = "x86_64-linux";
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config = {
+            allowUnfree = true;
+          };
+        };
         modules = [
           ./hosts/laptop/laptop.nix
           home-manager.nixosModules.home-manager
@@ -46,8 +46,13 @@
 
     homeManagerConfigurations = {
       "${username}" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        system = system;
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config = {
+            allowUnfree = true;
+          };
+        };
+        system = "x86_64-linux";
         username = username;
         configuration = {
           imports = [
