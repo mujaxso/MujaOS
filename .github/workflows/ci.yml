@@ -21,18 +21,55 @@ jobs:
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
+          
+    - name: Install Cachix
+      uses: cachix/cachix-action@v14
+      with:
+        name: nix-community
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+        
+    - name: Cache Nix Store
+      uses: actions/cache@v4
+      with:
+        path: /nix/store
+        key: nix-store-${{ hashFiles('flake.lock') }}
+        restore-keys: |
+          nix-store-
+    
+    - name: Show flake info
+      run: nix flake show --allow-import-from-derivation
+    
+    - name: Evaluate configurations
+      run: nix eval .#nixosConfigurations --json --apply 'builtins.attrNames' | jq -r '.[]'
     
     - name: Build system configuration
-      run: nix build .#nixosConfigurations.laptop.config.system.build.toplevel --print-build-logs
+      run: |
+        set +e
+        nix build .#nixosConfigurations.laptop.config.system.build.toplevel \
+          --print-build-logs \
+          --show-trace \
+          --verbose
+        BUILD_EXIT_CODE=$?
+        if [ $BUILD_EXIT_CODE -ne 0 ]; then
+          echo "Build failed with exit code $BUILD_EXIT_CODE"
+          # Try to get more info about why it failed
+          nix why-depends .#nixosConfigurations.laptop.config.system.build.toplevel /nix/store/378rcs60a8dxib23f17r09ig4bkmjsm8-nixos-system-laptop-25.11.20251025.6a08e6b.drv || true
+          exit $BUILD_EXIT_CODE
+        fi
     
     - name: Run flake checks
-      run: nix flake check --print-build-logs
+      run: nix flake check --print-build-logs --show-trace
     
     - name: Build other configurations (if any)
       run: |
-        nix flake show --json | jq -r '.nixosConfigurations | keys[]' | while read config; do
-          echo "Building configuration: $config"
-          nix build .#nixosConfigurations.$config.config.system.build.toplevel --print-build-logs || true
+        nix eval .#nixosConfigurations --json --apply 'builtins.attrNames' | jq -r '.[]' | while read config; do
+          if [ "$config" != "laptop" ]; then
+            echo "Building configuration: $config"
+            nix build .#nixosConfigurations.$config.config.system.build.toplevel \
+              --print-build-logs \
+              --show-trace \
+              --verbose || echo "Failed to build $config, continuing..."
+          fi
         done
 
   release-draft:
@@ -42,6 +79,7 @@ jobs:
     outputs:
       upload_url: ${{ steps.release_draft.outputs.upload_url }}
     steps:
+      - uses: actions/checkout@v4
       - uses: release-drafter/release-drafter@v6
         id: release_draft
         with:
@@ -68,9 +106,12 @@ jobs:
     
     - name: Build all configurations
       run: |
-        nix flake show --json | jq -r '.nixosConfigurations | keys[]' | while read config; do
+        nix eval .#nixosConfigurations --json --apply 'builtins.attrNames' | jq -r '.[]' | while read config; do
           echo "Building configuration: $config"
-          nix build .#nixosConfigurations.$config.config.system.build.toplevel --print-build-logs
+          nix build .#nixosConfigurations.$config.config.system.build.toplevel \
+            --print-build-logs \
+            --show-trace \
+            --verbose
         done
     
     - name: Create Release
