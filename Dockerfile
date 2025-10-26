@@ -1,5 +1,6 @@
 # ---- Builder: use Nix to build your app (flakes) ----
-FROM nixos/nix:latest AS builder
+# Use the unstable tag to match your flake
+FROM nixos/nix:unstable AS builder
 
 # Enable flakes and set up workdir
 ENV NIX_CONFIG="experimental-features = nix-command flakes"
