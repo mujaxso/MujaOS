@@ -1,0 +1,37 @@
+name: Issue Welcome
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome Message
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            if (!issue.labels.some(label => label.name === 'welcome-bot')) {
+              github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `👋 Hello @${issue.user.login}!
+
+Thank you for opening this issue. We appreciate you taking the time to help improve MujaOS.
+
+Please make sure you've provided enough details for us to understand and address your issue. If this is a bug report, please include steps to reproduce, expected behavior, and actual behavior. For feature requests, please describe your use case clearly.
+
+Our team will review this issue and get back to you soon.`
+              });
+              
+              // Add a welcome label
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: ['welcome-bot']
+              });
+            }

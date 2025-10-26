@@ -1,36 +1,64 @@
-name: CI and Release
+name: CI and Releases
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  release:
+    types: [published]
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
     - name: Install Nix
       uses: cachix/install-nix-action@v27
       with:
         extra_nix_config: |
           experimental-features = nix-command flakes
     
-    - name: Build system
-      run: nix build .#nixosConfigurations.laptop.config.system.build.toplevel
+    - name: Build system configuration
+      run: nix build .#nixosConfigurations.laptop.config.system.build.toplevel --print-build-logs
     
-    - name: Run tests (if any)
-      run: nix flake check
+    - name: Run flake checks
+      run: nix flake check --print-build-logs
+    
+    - name: Build other configurations (if any)
+      run: |
+        nix flake show --json | jq -r '.nixosConfigurations | keys[]' | while read config; do
+          echo "Building configuration: $config"
+          nix build .#nixosConfigurations.$config.config.system.build.toplevel --print-build-logs || true
+        done
+
+  release-draft:
+    name: Draft Release
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    outputs:
+      upload_url: ${{ steps.release_draft.outputs.upload_url }}
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        id: release_draft
+        with:
+          config-name: release-drafter.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
-    needs: build
+    name: Create Release
+    needs: [build, release-draft]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     
     - name: Install Nix
       uses: cachix/install-nix-action@v27
@@ -38,13 +66,17 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
     
-    - name: Build system
-      run: nix build .#nixosConfigurations.laptop.config.system.build.toplevel
+    - name: Build all configurations
+      run: |
+        nix flake show --json | jq -r '.nixosConfigurations | keys[]' | while read config; do
+          echo "Building configuration: $config"
+          nix build .#nixosConfigurations.$config.config.system.build.toplevel --print-build-logs
+        done
     
     - name: Create Release
       uses: softprops/action-gh-release@v2
       with:
-        draft: true
+        draft: false
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
