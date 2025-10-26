@@ -12,6 +12,23 @@
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install Nix
+        uses: cachix/install-nix-action@v26
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Check flake lock
+        run: |
+          if ! nix flake check --print-build-logs; then
+            echo "Flake check failed. Consider running 'nix flake update' to update inputs."
+            exit 1
+          fi
+
+      - name: Build with Nix
+        run: nix build .#mujaos --print-build-logs
+
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
