@@ -62,46 +62,6 @@ jobs:
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
           echo "is_prerelease=${IS_PRERELEASE}" >> "$GITHUB_OUTPUT"
 
-  build-release-assets:
-    name: Build Release Assets - ${{ matrix.platform.name }}
-    needs: prepare-release
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - os: ubuntu-latest
-            name: linux-x86_64
-            target: x86_64-unknown-linux-gnu
-    runs-on: ${{ matrix.platform.os }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup cross-compilation
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu
-
-      - name: Build for ${{ matrix.platform.name }}
-        run: |
-          echo "Building for ${{ matrix.platform.target }}"
-          mkdir -p "release-builds/${{ matrix.platform.name }}"
-
-      - name: Package release
-        run: |
-          cd "release-builds/${{ matrix.platform.name }}"
-          tar -czf "../../mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz" .
-          cd ../..
-          sha256sum "mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz" \
-            > "mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz.sha256"
-
-      - name: Upload release assets
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-${{ matrix.platform.name }}
-          path: |
-            mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz
-            mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz.sha256
 
   generate-changelog:
     name: Generate Changelog
@@ -145,19 +105,9 @@ jobs:
 
   create-release:
     name: Create GitHub Release
-    needs: [prepare-release, build-release-assets, generate-changelog]
+    needs: [prepare-release, generate-changelog]
     runs-on: ubuntu-latest
     steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: release-assets
-          pattern: release-*
-          merge-multiple: true
-
-      - name: List release assets
-        run: ls -lah release-assets/
-
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
@@ -166,7 +116,6 @@ jobs:
           body: ${{ needs.generate-changelog.outputs.changelog }}
           draft: ${{ github.event.inputs.draft || true }}
           prerelease: ${{ needs.prepare-release.outputs.is_prerelease }}
-          files: release-assets/*
           generate_release_notes: true
           make_latest: ${{ needs.prepare-release.outputs.is_prerelease == 'false' }}
         env:
