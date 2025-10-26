@@ -6,7 +6,7 @@ let
       owner = "mujaxso";
       repo = "dwm";
       rev = "b7369d6c22585df39944fceb605b95fb0ca40ec3";  # Replace with actual commit hash, not "main"
-      hash = "sha256-EBMxjhmbFORGG57ud4He8vbbsaa9xAG0lUqUTdxly5E=";
+      hash = "sha256-QZUyz3q02GIlW/2mLR16xsawON0jBwChxPlhpczEIeo=";
     };
   });
 in
