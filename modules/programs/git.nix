@@ -14,23 +14,26 @@
 
   programs.git = {
     enable = true;
-    userName = "Mujahid Siyam";
-    userEmail = "mujaxso@proton.me";
 
     # Do not set signing.key here for SSH; that option is for GPG keys.
     signing = {
       signByDefault = true;
     };
 
-    aliases = {
-      co = "checkout";
-      br = "branch";
-      ci = "commit";
-      st = "status";
-      lg = "log --oneline --graph --decorate";
-    };
+    settings = {
+      user = {
+        name = "Mujahid Siyam";
+        email = "mujaxso@proton.me";
+      };
+      
+      alias = {
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        st = "status";
+        lg = "log --oneline --graph --decorate";
+      };
 
-    extraConfig = {
       core.editor = "nvim";
       init.defaultBranch = "main";
       pull.rebase = false;
@@ -53,16 +56,20 @@
     includes = [
       {
         condition = "gitdir:~/Dev/";
-        contents.user = {
-          email = "mujaxso@gmail.com";
-          name = "Mujahid Siyam";
+        contents = {
+          user = {
+            email = "mujaxso@gmail.com";
+            name = "Mujahid Siyam";
+          };
         };
       }
       {
         condition = "gitdir:~/Work/";
-        contents.user = {
-          email = "mujaxso@proton.me";
-          name = "Mujahid Mohamed Ismail";
+        contents = {
+          user = {
+            email = "mujaxso@proton.me";
+            name = "Mujahid Mohamed Ismail";
+          };
         };
       }
     ];
