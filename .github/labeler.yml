@@ -1,17 +1,16 @@
-'documentation':
+---
+documentation:
   - '**/*.md'
   - 'docs/**/*'
 
-'dependencies':
+dependencies:
   - 'package.json'
-  - 'package-lock.json'
   - 'Cargo.toml'
-  - 'Cargo.lock'
   - 'go.mod'
-  - 'go.sum'
+  - 'requirements.txt'
   - 'build.zig.zon'
 
-'configuration':
+configuration:
   - '**/*.yml'
   - '**/*.yaml'
   - '**/*.toml'
@@ -19,15 +18,15 @@
   - '**/*.ini'
   - '**/*.conf'
 
-'tests':
+tests:
   - 'tests/**/*'
   - '**/*.test.*'
   - '**/*.spec.*'
 
-'github-actions':
+github-actions:
   - '.github/workflows/**/*'
   - '.github/actions/**/*'
 
-'nix':
+nix:
   - '**/*.nix'
   - 'flake.lock'

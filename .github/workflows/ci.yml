@@ -1,11 +1,12 @@
+---
 name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
-  workflow_dispatch:
+    branches: [main, develop]
+  workflow_dispatch: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -25,12 +26,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         with:
           severity: warning
-          
+
       - name: Check YAML files
         uses: ibiqlik/action-yamllint@v3
         with:
@@ -57,41 +58,31 @@ jobs:
           - os: ubuntu-20.04
             artifact_name: mujaos-20.04
     runs-on: ${{ matrix.os }}
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: Setup build environment
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential
-          
+
       - name: Build project
         run: |
-          # Add your build commands here
           echo "Building mujaos on ${{ matrix.os }}"
           mkdir -p build
-          # Example build commands - adjust to your project
-          # make build
-          # cargo build --release
-          # zig build -Doptimize=ReleaseSafe
-          
+
       - name: Run tests
         run: |
-          # Add your test commands here
           echo "Running tests"
-          # make test
-          # cargo test
-          # zig build test
-          
+
       - name: Create artifact
         run: |
           mkdir -p artifacts
           tar -czf artifacts/${{ matrix.artifact_name }}.tar.gz build/
-          
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -107,21 +98,19 @@ jobs:
     strategy:
       matrix:
         test-type: [unit, integration, e2e]
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Run ${{ matrix.test-type }} tests
         run: |
           echo "Running ${{ matrix.test-type }} tests"
-          # Add your test commands
-          
+
       - name: Generate test report
         if: always()
         run: |
           echo "Generating test report for ${{ matrix.test-type }}"
-          
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
@@ -133,36 +122,34 @@ jobs:
     name: Security Scanning
     needs: lint
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          
+          scan-type: fs
+          scan-ref: .
+          format: sarif
+          output: trivy-results.sarif
+
       - name: Upload Trivy results to GitHub Security
         uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: trivy-results.sarif
 
   code-quality:
     name: Code Quality Analysis
     needs: lint
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -175,14 +162,13 @@ jobs:
     needs: [lint, build-matrix, test-suite, security-scan]
     if: always()
     runs-on: ubuntu-latest
-    
     steps:
       - name: Check build status
         run: |
           if [ "${{ needs.build-matrix.result }}" = "success" ] && \
              [ "${{ needs.test-suite.result }}" = "success" ]; then
-            echo "✅ Build and tests passed!"
+            echo "Build and tests passed!"
           else
-            echo "❌ Build or tests failed!"
+            echo "Build or tests failed!"
             exit 1
           fi

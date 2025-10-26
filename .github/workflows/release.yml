@@ -1,3 +1,4 @@
+---
 name: Release Management
 
 on:
@@ -35,13 +36,12 @@ jobs:
       version: ${{ steps.version.outputs.version }}
       tag: ${{ steps.version.outputs.tag }}
       is_prerelease: ${{ steps.version.outputs.is_prerelease }}
-      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: Determine version
         id: version
         run: |
@@ -52,18 +52,18 @@ jobs:
           else
             TAG="${GITHUB_REF#refs/tags/}"
             VERSION="${TAG#v}"
-            if [[ "$TAG" =~ (alpha|beta|rc) ]]; then
+            if echo "$TAG" | grep -Eiq '(alpha|beta|rc)'; then
               IS_PRERELEASE="true"
             else
               IS_PRERELEASE="false"
             fi
           fi
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "tag=${TAG}" >> $GITHUB_OUTPUT
-          echo "is_prerelease=${IS_PRERELEASE}" >> $GITHUB_OUTPUT
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "is_prerelease=${IS_PRERELEASE}" >> "$GITHUB_OUTPUT"
 
   build-release-assets:
-    name: Build Release Assets - ${{ matrix.platform }}
+    name: Build Release Assets - ${{ matrix.platform.name }}
     needs: prepare-release
     strategy:
       fail-fast: false
@@ -78,34 +78,29 @@ jobs:
           - os: ubuntu-latest
             name: linux-riscv64
             target: riscv64gc-unknown-linux-gnu
-            
     runs-on: ${{ matrix.platform.os }}
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Setup cross-compilation
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu
-          
+
       - name: Build for ${{ matrix.platform.name }}
         run: |
           echo "Building for ${{ matrix.platform.target }}"
-          mkdir -p release-builds/${{ matrix.platform.name }}
-          # Add your platform-specific build commands
-          # Example for Rust: cargo build --release --target ${{ matrix.platform.target }}
-          # Example for Zig: zig build -Dtarget=${{ matrix.platform.target }} -Doptimize=ReleaseSafe
-          
+          mkdir -p "release-builds/${{ matrix.platform.name }}"
+
       - name: Package release
         run: |
-          cd release-builds/${{ matrix.platform.name }}
-          tar -czf ../../mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz *
+          cd "release-builds/${{ matrix.platform.name }}"
+          tar -czf "../../mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz" .
           cd ../..
-          sha256sum mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz > \
-            mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz.sha256
-          
+          sha256sum "mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz" \
+            > "mujaos-${{ needs.prepare-release.outputs.version }}-${{ matrix.platform.name }}.tar.gz.sha256"
+
       - name: Upload release assets
         uses: actions/upload-artifact@v4
         with:
@@ -120,83 +115,44 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changelog: ${{ steps.changelog.outputs.changelog }}
-      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: Generate changelog
         id: changelog
         run: |
-          PREVIOUS_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1) 2>/dev/null || echo "")
-          
+          PREVIOUS_TAG="$(git describe --abbrev=0 --tags "$(git rev-list --tags --skip=1 --max-count=1)" 2>/dev/null || true)"
           if [ -z "$PREVIOUS_TAG" ]; then
-            COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges)
+            COMMITS="$(git log --pretty=format:'- %s (%h)' --no-merges)"
           else
-            COMMITS=$(git log ${PREVIOUS_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+            COMMITS="$(git log "${PREVIOUS_TAG}..HEAD" --pretty=format:'- %s (%h)' --no-merges)"
           fi
-          
-          # Categorize commits
-          FEATURES=$(echo "$COMMITS" | grep -i "feat\|feature" || true)
-          FIXES=$(echo "$COMMITS" | grep -i "fix\|bug" || true)
-          DOCS=$(echo "$COMMITS" | grep -i "docs\|documentation" || true)
-          CHORE=$(echo "$COMMITS" | grep -i "chore\|refactor\|style" || true)
-          OTHER=$(echo "$COMMITS" | grep -v -i "feat\|feature\|fix\|bug\|docs\|documentation\|chore\|refactor\|style" || true)
-          
-          CHANGELOG="## What's Changed in ${{ needs.prepare-release.outputs.tag }}
+          FEATURES="$(printf '%s\n' "$COMMITS" | grep -i 'feat\|feature' || true)"
+          FIXES="$(printf '%s\n' "$COMMITS" | grep -i 'fix\|bug' || true)"
+          DOCS="$(printf '%s\n' "$COMMITS" | grep -i 'docs\|documentation' || true)"
+          CHORE="$(printf '%s\n' "$COMMITS" | grep -vi 'feat\|feature\|fix\|bug\|docs\|documentation' || true)"
 
-          "
-          
-          if [ ! -z "$FEATURES" ]; then
-            CHANGELOG="${CHANGELOG}### 🚀 Features
-          ${FEATURES}
-
-          "
+          CHANGELOG="## What's Changed in ${{ needs.prepare-release.outputs.tag }}\n"
+          [ -n "$FEATURES" ] && CHANGELOG="${CHANGELOG}\n### 🚀 Features\n${FEATURES}\n"
+          [ -n "$FIXES" ] && CHANGELOG="${CHANGELOG}\n### 🐛 Bug Fixes\n${FIXES}\n"
+          [ -n "$DOCS" ] && CHANGELOG="${CHANGELOG}\n### 📚 Documentation\n${DOCS}\n"
+          [ -n "$CHORE" ] && CHANGELOG="${CHANGELOG}\n### 🧰 Maintenance\n${CHORE}\n"
+          if [ -n "$PREVIOUS_TAG" ]; then
+            CHANGELOG="${CHANGELOG}\n**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREVIOUS_TAG}...${{ needs.prepare-release.outputs.tag }}"
           fi
-          
-          if [ ! -z "$FIXES" ]; then
-            CHANGELOG="${CHANGELOG}### 🐛 Bug Fixes
-          ${FIXES}
-
-          "
-          fi
-          
-          if [ ! -z "$DOCS" ]; then
-            CHANGELOG="${CHANGELOG}### 📚 Documentation
-          ${DOCS}
-
-          "
-          fi
-          
-          if [ ! -z "$CHORE" ]; then
-            CHANGELOG="${CHANGELOG}### 🧰 Maintenance
-          ${CHORE}
-
-          "
-          fi
-          
-          if [ ! -z "$OTHER" ]; then
-            CHANGELOG="${CHANGELOG}### Other Changes
-          ${OTHER}
-
-          "
-          fi
-          
-          if [ ! -z "$PREVIOUS_TAG" ]; then
-            CHANGELOG="${CHANGELOG}**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREVIOUS_TAG}...${{ needs.prepare-release.outputs.tag }}"
-          fi
-          
-          echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          echo "$CHANGELOG" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          {
+            echo "changelog<<'EOF'"
+            printf '%s\n' "$CHANGELOG"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
   create-release:
     name: Create GitHub Release
     needs: [prepare-release, build-release-assets, generate-changelog]
     runs-on: ubuntu-latest
-    
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
@@ -204,12 +160,10 @@ jobs:
           path: release-assets
           pattern: release-*
           merge-multiple: true
-          
+
       - name: List release assets
-        run: |
-          echo "Release assets:"
-          ls -lah release-assets/
-          
+        run: ls -lah release-assets/
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
@@ -223,20 +177,3 @@ jobs:
           make_latest: ${{ needs.prepare-release.outputs.is_prerelease == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Create release discussion
-        if: ${{ needs.prepare-release.outputs.is_prerelease == 'false' }}
-        uses: abirismyname/create-discussion@v1.2.0
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          title: Release ${{ needs.prepare-release.outputs.tag }}
-          body: |
-            🎉 Release ${{ needs.prepare-release.outputs.tag }} is now available!
-            
-            Download: https://github.com/${{ github.repository }}/releases/tag/${{ needs.prepare-release.outputs.tag }}
-            
-            ${{ needs.generate-changelog.outputs.changelog }}
-          repository-id: ${{ secrets.DISCUSSIONS_REPOSITORY_ID }}
-          category-id: ${{ secrets.DISCUSSIONS_CATEGORY_ID }}
-        continue-on-error: true
