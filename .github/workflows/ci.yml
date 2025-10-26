@@ -26,8 +26,12 @@
             exit 1
           fi
 
-      - name: Build with Nix
-        run: nix build .#mujaos --print-build-logs
+      - name: Build all NixOS configurations
+        run: |
+          nix build .#nixosConfigurations.laptop.config.system.build.toplevel --print-build-logs
+          nix build .#nixosConfigurations.desktop.config.system.build.toplevel --print-build-logs
+          nix build .#nixosConfigurations.server.config.system.build.toplevel --print-build-logs
+          nix build .#nixosConfigurations.workstation.config.system.build.toplevel --print-build-logs
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master

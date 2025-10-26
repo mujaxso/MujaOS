@@ -35,9 +35,9 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
 
-      - name: Build image tarball for ${{ matrix.system }}
+      - name: Build laptop configuration for ${{ matrix.system }}
         run: |
-          nix build .#packages.${{ matrix.system }}.mujaos-image
+          nix build .#nixosConfigurations.laptop.config.system.build.toplevel --print-build-logs
 
       - name: Log in to GHCR
         if: github.event_name != 'pull_request'
