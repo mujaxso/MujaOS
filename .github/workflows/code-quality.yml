@@ -1,0 +1,36 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-formatting:
+    name: Check Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for trailing whitespace
+        run: |
+          if find . -name "*.nix" -o -name "*.yml" -o -name "*.yaml" -o -name "*.md" | xargs grep -l "[[:space:]]$"; then
+            echo "Error: Trailing whitespace found in files"
+            exit 1
+          fi
+
+  validate-yaml:
+    name: Validate YAML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate YAML files
+        run: |
+          find .github -name "*.yml" -o -name "*.yaml" | while read file; do
+            echo "Validating $file"
+            python3 -c "import yaml; yaml.safe_load(open('$file'))" || exit 1
+          done
