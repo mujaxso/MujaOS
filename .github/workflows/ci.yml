@@ -1,0 +1,50 @@
+name: CI and Release
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Nix
+      uses: cachix/install-nix-action@v27
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    
+    - name: Build system
+      run: nix build .#nixosConfigurations.laptop.config.system.build.toplevel
+    
+    - name: Run tests (if any)
+      run: nix flake check
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Nix
+      uses: cachix/install-nix-action@v27
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    
+    - name: Build system
+      run: nix build .#nixosConfigurations.laptop.config.system.build.toplevel
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        draft: true
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
