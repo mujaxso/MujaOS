@@ -52,9 +52,6 @@
       input-overlay
       droidcam-obs
 
-      # Canvas
-      obs-vertical-canvas
-
       # Interactive
       obs-scale-to-sound
       obs-command-source
