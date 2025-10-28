@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   programs.zsh.shellAliases = {
     # Nix/NixOS specific
     nsu = "sudo nixos-rebuild switch";
@@ -83,5 +82,9 @@
     l = "eza -F --icons --color=always --group-directories-first";
     grep = "grep --color=auto";
 
+    # thunderbird
+    tb = "thunderbird";
+    tbp = "thunderbird -P";
+    tbs = "thunderbird --safe-mode";
   };
 }

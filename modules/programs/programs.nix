@@ -9,6 +9,8 @@
   terminals = ./terminals/terminals.nix;
   browsers = ./browsers/browsers.nix;
   videos = ./videos/videos.nix;
+  thunderbird = ./thunderbird.nix;
+  discord = ./discord.nix;
   yazi = ./yazi.nix;
   thunar = ./thunar.nix;
   feh = ./feh.nix;
@@ -20,6 +22,9 @@ in {
     terminals
     browsers
     videos
+    thunderbird
+    discord
+
     yazi
     # thunar
     feh
