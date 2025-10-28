@@ -86,5 +86,10 @@
     tb = "thunderbird";
     tbp = "thunderbird -P";
     tbs = "thunderbird --safe-mode";
+
+    # virt manager
+    vmstart = "virsh start";
+    vmlist = "virsh list --all";
+    vmconsole = "virsh console";
   };
 }

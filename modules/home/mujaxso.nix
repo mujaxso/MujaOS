@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   username = "mujaxso";
   homeDir = "/home/${username}";
 
@@ -9,6 +12,7 @@ let
     ../programs/programs.nix
     #../lang/lang.nix
     ../ai/ai.nix
+    ../virtualization/virtualization.nix
   ];
 in {
   inherit imports;
@@ -18,14 +22,13 @@ in {
     homeDirectory = homeDir;
 
     sessionVariables = {
-    # GTK_THEME = "Materia-dark";
-    XDG_CONFIG_HOME = lib.mkForce "${homeDir}/.config";
-    EDITOR = "nvim";
-    MOZ_ENABLE_WAYLAND = "1";
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
+      # GTK_THEME = "Materia-dark";
+      XDG_CONFIG_HOME = lib.mkForce "${homeDir}/.config";
+      EDITOR = "nvim";
+      MOZ_ENABLE_WAYLAND = "1";
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
     };
-
   };
 
   programs.home-manager.enable = true;
@@ -33,7 +36,6 @@ in {
   # REQUIRED!
   home.stateVersion = "25.05";
 
- 
   home.packages = with pkgs; [
     grim
     slurp

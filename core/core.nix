@@ -11,6 +11,7 @@
   security = ./security.nix;
   systemd = ./systemd.nix;
   networking = ./networking.nix;
+  virtualisation = ./virtualization.nix;
 in {
   imports = [
     shells
@@ -21,5 +22,6 @@ in {
     security
     systemd
     networking
+    virtualisation
   ];
 }
