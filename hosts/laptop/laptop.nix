@@ -62,6 +62,8 @@
 
   xdg.portal.wlr.enable = false;
 
+  programs.dconf.enable = true;
+
   environment.systemPackages = with pkgs; [
     git
     neovim
