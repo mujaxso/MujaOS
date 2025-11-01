@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   # define each imported module
   hyprland = ./hyprland/hyprland.nix;
   suckless = ./suckelss/suckless.nix;
@@ -8,6 +10,7 @@ let
   waybar = ./waybar/waybar.nix;
   rofi = ./rofi/rofi.nix;
   gtk = ./gtk.nix;
+  qt = ./qt.nix;
   cursor = ./cursor.nix;
   # dunst = ./dunst.nix;
   wlogout = ./wlogout.nix;
@@ -20,6 +23,7 @@ in {
     waybar
     rofi
     gtk
+    qt
     cursor
     # dunst
     wlogout
