@@ -14,6 +14,7 @@
   yazi = ./yazi.nix;
   thunar = ./thunar.nix;
   feh = ./feh.nix;
+  bittorrent = ./bittorrent.nix;
 in {
   imports = [
     git
@@ -24,10 +25,10 @@ in {
     videos
     thunderbird
     discord
-
     yazi
     # thunar
     feh
+    bittorrent
   ];
 
   home.packages = with pkgs; [
