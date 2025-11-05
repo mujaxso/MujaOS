@@ -8,6 +8,11 @@
     ./local-networking.nix
   ];
 
+  networking.firewall = {
+    trustedInterfaces = ["virbr0"];
+    # checkReversePath = false;
+  };
+
   # add any subdomain dynamically
   local.networking.hosts = {
     # Uses defaults: 127.0.0.1 blog.localhost
