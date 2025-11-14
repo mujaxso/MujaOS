@@ -1,15 +1,18 @@
 {
-    kb_layout = "us";
-    # kb_variant =
-    # kb_model =
-    kb_options = "ctrl:nocaps";
-    # kb_rules =
+  kb_layout = "us,ara";
+  kb_options = "grp:alt_shift_toggle,ctrl:nocaps,caps:escape"; # Add Escape on tap
+  kb_variant = ","; # Empty variant for US, default for Arabic
+  # kb_model =
+  # kb_rules =
 
-    follow_mouse = 1;
+  follow_mouse = 1;
 
-    sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+  sensitivity = 0;
+  accel_profile = "flat"; # Disable mouse acceleration for precision
 
-    touchpad = {
-        natural_scroll = false;
-    };
+  touchpad = {
+    natural_scroll = false;
+    tap-to-click = true; # Easier tapping
+    disable_while_typing = true; # Prevent accidental touches
+  };
 }
