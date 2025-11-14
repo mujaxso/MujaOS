@@ -91,5 +91,8 @@
     vmstart = "virsh start";
     vmlist = "virsh list --all";
     vmconsole = "virsh console";
+
+    # ai 
+    aider = "aider --no-attribute-author --no-attribute-committer --no-attribute-co-authored-by";
   };
 }

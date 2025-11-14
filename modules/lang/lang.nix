@@ -22,6 +22,7 @@
   vlang = ./vlang.nix;
   ocaml = ./ocaml.nix;
   toml = ./toml.nix;
+  markdown = ./markdown.nix;
   terraform = ./terraform.nix;
   latex = ./latex.nix;
 in {
@@ -44,6 +45,7 @@ in {
     vlang
     ocaml
     toml
+    markdown
     terraform
     # latex
   ];
