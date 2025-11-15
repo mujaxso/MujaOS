@@ -7,17 +7,17 @@
     passtrough = false;
     gtk-layer-shell = true;
     height = 0;
-    
+
     "modules-left" = [
       "hyprland/workspaces"
       "hyprland/mode"
       "hyprland/window"
     ];
-    
+
     "modules-center" = [
       "clock"
     ];
-    
+
     "modules-right" = [
       "custom/playerctl"
       "pulseaudio"
@@ -26,7 +26,7 @@
       "cpu"
       "memory"
       "custom/notification"
-      "battery"      
+      "battery"
       "custom/exit"
     ];
 
@@ -40,34 +40,38 @@
 
     battery = {
       format = "{capacity}% {icon}";
-      format-icons = [ "" "" "" "" "" ];
+      format-icons = ["" "" "" "" ""];
     };
 
     network = {
-      format-wifi = "  {signalStrength}%";
+      format-wifi = "{signalStrength}%  ";
       format-ethernet = "󰈀 {ipaddr}";
       format-disconnected = "󰌙";
+      on-click = "nm-connection-editor";
+      # on-click = "ghostty -e nmtui";
+      on-click-right = "nmcli device wifi rescan";
+      on-click-middle = "nmcli networking off && nmcli networking on";
     };
 
     pulseaudio = {
       format = "{volume}% {icon}";
-      format-icons = [ "" "" "" ];
+      format-icons = ["" "" ""];
       on-click = "pavucontrol";
     };
 
     memory = {
       interval = 30;
-      format = "  {}%";
-      format-alt = " {used:0.1f}G";
+      format = "{}%  ";
+      format-alt = "{used:0.1f}G ";
       max-length = 10;
     };
 
     cpu = {
-      format = "  {}%";
+      format = "{}%  ";
       format-alt = "{usage}% ";
       tooltip = false;
     };
-    
+
     backlight = {
       format = "󰖨  {}";
       device = "acpi_video0";
@@ -126,7 +130,7 @@
     };
 
     "hyprland/workspaces" = {
-      format = "{icon}";  # or "{id}" or "{name} {icon}" etc
+      format = "{icon}"; # or "{id}" or "{name} {icon}" etc
       format-icons = {
         "1" = "󰖟";
         "2" = "";
@@ -136,7 +140,7 @@
         "6" = "";
         "7" = "󰇮";
         "8" = "󰕧";
-        "9" = "";     
+        "9" = "";
       };
       sort-by-number = true;
       all-outputs = true;

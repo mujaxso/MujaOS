@@ -21,7 +21,7 @@
   networking.hostName = "laptop";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  #networking.networkmanager.enable = true;
   # networking.networkmanager.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.appstream
   # networking.wireless.iwd.enable = true;

@@ -8,10 +8,21 @@
     ./local-networking.nix
   ];
 
-  networking.firewall = {
-    trustedInterfaces = ["virbr0"];
-    # checkReversePath = false;
+  networking = {
+    networkmanager = {
+      enable = true;
+    };
+
+    firewall = {
+      trustedInterfaces = ["virbr0"];
+      # checkReversePath = false;
+    };
   };
+
+  environment.systemPackages = with pkgs; [
+    networkmanager
+    networkmanagerapplet # Provides nm-connection-editor
+  ];
 
   # add any subdomain dynamically
   local.networking.hosts = {
