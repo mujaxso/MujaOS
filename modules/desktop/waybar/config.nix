@@ -38,6 +38,12 @@
       tooltip-format = "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
     };
 
+    tray = {
+      # icon-size = 18;
+      spacing = 5;
+      show-passive-items = false;
+    };
+
     battery = {
       format = "{capacity}% {icon}";
       format-icons = ["" "" "" "" ""];
