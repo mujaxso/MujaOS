@@ -3,8 +3,8 @@
   pkgs,
   ...
 }: {
-  home.packages = [
-    pkgs.thunderbird
+  home.packages = with pkgs; [
+    thunderbird
   ];
 
   # xdg.mimeApps = {
