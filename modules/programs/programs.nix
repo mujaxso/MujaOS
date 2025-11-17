@@ -15,6 +15,7 @@
   thunar = ./thunar.nix;
   feh = ./feh.nix;
   bittorrent = ./bittorrent.nix;
+  daw = ./daw.nix;
 in {
   imports = [
     git
@@ -29,6 +30,7 @@ in {
     # thunar
     feh
     bittorrent
+    daw
   ];
 
   home.packages = with pkgs; [

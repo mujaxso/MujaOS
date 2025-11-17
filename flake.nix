@@ -8,6 +8,7 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "home-manager";
+    musnix.url = "github:musnix/musnix";
   };
 
   outputs = {
@@ -15,11 +16,12 @@
     nixpkgs,
     home-manager,
     agenix,
+    musnix,
     ...
   } @ inputs: let
     systems = ["x86_64-linux"];
     username = "mujaxso";
-    
+
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
     nixosConfigurations = {
@@ -40,6 +42,7 @@
             home-manager.users.${username} = import ./modules/home/mujaxso.nix;
           }
           agenix.nixosModules.default
+          musnix.nixosModules.musnix # Import musnix module
         ];
       };
     };
@@ -62,6 +65,5 @@
         };
       };
     };
-
   };
 }

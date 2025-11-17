@@ -11,6 +11,7 @@
   security = ./security.nix;
   systemd = ./systemd.nix;
   networking = ./networking.nix;
+  audio = ./audio.nix;
   virtualisation = ./virtualization.nix;
 in {
   imports = [
@@ -22,6 +23,7 @@ in {
     security
     systemd
     networking
+    #audio
     virtualisation
   ];
 }
