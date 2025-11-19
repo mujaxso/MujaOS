@@ -9,6 +9,7 @@
   terminals = ./terminals/terminals.nix;
   browsers = ./browsers/browsers.nix;
   videos = ./videos/videos.nix;
+  libreoffice = ./libreoffice.nix;
   thunderbird = ./thunderbird.nix;
   discord = ./discord.nix;
   yazi = ./yazi.nix;
@@ -16,6 +17,7 @@
   feh = ./feh.nix;
   bittorrent = ./bittorrent.nix;
   daw = ./daw.nix;
+  btop = ./btop.nix;
 in {
   imports = [
     git
@@ -24,6 +26,7 @@ in {
     terminals
     browsers
     videos
+    libreoffice
     thunderbird
     discord
     yazi
@@ -31,6 +34,7 @@ in {
     feh
     bittorrent
     daw
+    btop
   ];
 
   home.packages = with pkgs; [
