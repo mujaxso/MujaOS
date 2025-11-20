@@ -31,6 +31,7 @@
           system = "x86_64-linux";
           config = {
             allowUnfree = true;
+            rocmSupport = true; # AMD GPU support
           };
         };
         modules = [
