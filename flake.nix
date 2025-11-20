@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "home-manager";
@@ -15,6 +16,7 @@
     self,
     nixpkgs,
     home-manager,
+    nix-flatpak,
     agenix,
     musnix,
     ...
@@ -42,6 +44,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./modules/home/mujaxso.nix;
           }
+          nix-flatpak.nixosModules.nix-flatpak
           agenix.nixosModules.default
           musnix.nixosModules.musnix # Import musnix module
         ];
@@ -61,6 +64,7 @@
         configuration = {
           imports = [
             ./modules/home/mujaxso.nix
+            nix-flatpak.homeManagerModules.nix-flatpak
             agenix.homeManagerModules.default
           ];
         };

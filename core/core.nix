@@ -13,6 +13,7 @@
   networking = ./networking.nix;
   audio = ./audio.nix;
   virtualisation = ./virtualization.nix;
+  flatpak = ./flatpak.nix;
 in {
   imports = [
     shells
@@ -25,5 +26,6 @@ in {
     networking
     #audio
     virtualisation
+    flatpak
   ];
 }
