@@ -64,6 +64,13 @@
 
   programs.dconf.enable = true;
 
+  environment.variables = {
+    GTK_THEME = "Materia-dark";
+    GTK2_RC_FILES = "/home/mujaxso/.config/gtk-2.0/gtkrc";
+    GTK_DATA_PREFIX = "/run/current-system/sw";
+    GTK_PATH = "/run/current-system/sw/lib/gtk-2.0";
+  };
+
   environment.systemPackages = with pkgs; [
     git
     neovim

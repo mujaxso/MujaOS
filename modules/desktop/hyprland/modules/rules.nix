@@ -14,5 +14,22 @@
     "maxsize 1 1,class:^(xwaylandvideobridge)$"
     "noblur,class:^(xwaylandvideobridge)$"
     "nofocus,class:^(xwaylandvideobridge)$"
+
+    # 1. FORCE ALL POPUPS TO FLOAT
+    # If a REAPER window is NOT the main window, float it.
+    "float,class:^(REAPER)$,title:^(?!.*REAPER v.*$)"
+
+    # 2. SPECIFIC FIX FOR BRIDGED PLUGINS (e.g., Windows plugins via Yabridge)
+    # These often run as "reaper_bridge" or "wine"
+    "float,class:^(reaper_bridge)$"
+    "float,class:^(wine)$"
+
+    # 3. Force resizing on those floating windows
+    "plugin:force_floating,class:^(REAPER)$" # If using hyprland plugins
+
+    # 4. Fallback: If title matches "FX", definitely float
+    "float,class:^(REAPER)$,title:^(FX:.*)$"
+    "float,class:^(reaper_bridge)$"
+    "float,class:^(wine)$"
   ];
 }
