@@ -11,13 +11,7 @@
     # ===================================================================
     # DAWs - Digital Audio Workstations
     # ===================================================================
-    (pkgs.writeShellScriptBin "reaper-dark" ''
-      export GTK_THEME=Adwaita:dark
-      export QT_STYLE_OVERRIDE=Adwaita-Dark
-      export GDK_BACKEND=x11
-      ${pkgs.reaper}/bin/reaper "$@"
-    '')
-    reaper # $60 - Most stable, pro mixing/recording
+    #reaper # $60 - Most stable, pro mixing/recording
     bitwig-studio # Modern, beautiful UI - native Linux
     ardour # FREE - Open-source tracking powerhouse
     lmms # FREE - Electronic music + MIDI sequencing

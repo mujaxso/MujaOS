@@ -9,6 +9,7 @@
   terminals = ./terminals/terminals.nix;
   browsers = ./browsers/browsers.nix;
   videos = ./videos/videos.nix;
+  audio = ./audio/audio.nix;
   libreoffice = ./libreoffice.nix;
   thunderbird = ./thunderbird.nix;
   discord = ./discord.nix;
@@ -16,7 +17,6 @@
   thunar = ./thunar.nix;
   feh = ./feh.nix;
   bittorrent = ./bittorrent.nix;
-  daw = ./daw.nix;
   btop = ./btop.nix;
 in {
   imports = [
@@ -26,6 +26,7 @@ in {
     terminals
     browsers
     videos
+    audio
     libreoffice
     thunderbird
     discord
@@ -33,7 +34,6 @@ in {
     # thunar
     feh
     bittorrent
-    daw
     btop
   ];
 
