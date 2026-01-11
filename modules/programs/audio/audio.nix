@@ -3,11 +3,11 @@
   pkgs,
   ...
 }: let
-  daw = ./daw.nix;
+  # daw = ./daw.nix;
   reaper = ./reaper.nix;
 in {
   imports = [
-    daw
+    #    daw
     reaper
   ];
 }
