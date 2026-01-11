@@ -1,5 +1,5 @@
 {
-  "$modifier" = "SUPER";
+  "$mainMod" = "SUPER";
   gaps_in = 2;
   gaps_out = 4;
   border_size = 2;
