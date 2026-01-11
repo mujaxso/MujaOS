@@ -6,6 +6,6 @@ in {
   imports = [
     emacs
     vscode
-    zed
+    # zed
   ];
 }

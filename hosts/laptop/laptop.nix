@@ -64,6 +64,8 @@
 
   programs.dconf.enable = true;
 
+  programs.hyprland.enable = true;
+
   environment.variables = {
     GTK_THEME = "Materia-dark";
     GTK2_RC_FILES = "/home/mujaxso/.config/gtk-2.0/gtkrc";

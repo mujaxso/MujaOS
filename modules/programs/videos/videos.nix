@@ -13,7 +13,7 @@ in {
     ffmpeg
     obs
     #davinci-resolve
-    kdenlive
+    # kdenlive
     mpv
   ];
 }

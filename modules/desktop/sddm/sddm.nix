@@ -1,18 +1,23 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   # 🪐 Astronaut SDDM Theme (with variant override)
   sddmAstronaut = pkgs.stdenv.mkDerivation {
     pname = "sddm-astronaut-theme";
-    version = "unstable";
+    version = "1.0-unstable-2025-01-05";
 
     src = pkgs.fetchFromGitHub {
       owner = "Keyitdev";
       repo = "sddm-astronaut-theme";
-      rev = "master";
-      sha256 = "071kvv86aha5yy3f5x39awdz3mbwmrmrdrndhdf7yjg7qj49yfr1";
+      # Pin a specific commit instead of "master"
+      rev = "11c0bf6147bbea466ce2e2b0559e9a9abdbcc7c3";
+      # Known-good SRI hash for this rev
+      sha256 = "sha256-gBSz+k/qgEaIWh1Txdgwlou/Lfrfv3ABzyxYwlrLjDk=";
     };
 
+    dontBuild = true;
     dontWrapQtApps = true;
 
     installPhase = ''
@@ -26,16 +31,22 @@ let
       EOF
     '';
   };
-in
-{
+in {
   # 🖥️ Enable X server (needed for SDDM)
   services.xserver.enable = true;
 
-  # 🚀 Configure SDDM
+  # 🚀 Configure SDDM (Qt6 + astronaut theme)
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "sddm-astronaut-theme"; # default theme
+
+    # This is the *SDDM theme name* – directory name under share/sddm/themes
+    theme = "sddm-astronaut-theme";
+
+    # Use Qt6 SDDM when using astronaut (qt6-only theme)[web:3]
+    package = pkgs.kdePackages.sddm;
+
+    # Ensure SDDM gets the right Qt deps
     extraPackages = with pkgs.qt6; [
       qtbase
       qtdeclarative
@@ -45,7 +56,7 @@ in
   };
 
   # 🌈 Add Hyprland sessions
-  services.displayManager.sessionPackages = [ pkgs.hyprland ];
+  services.displayManager.sessionPackages = [pkgs.hyprland];
 
   # 📦 Install Astronaut + Catppuccin themes
   environment.systemPackages = with pkgs; [
