@@ -54,16 +54,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1764135300,
-        "narHash": "sha256-5xOuutXM7UPTUcn3uDAD8UlPQsXmqPrX81cXoDOAGcA=",
+        "lastModified": 1767910483,
+        "narHash": "sha256-MOU5YdVu4DVwuT5ztXgQpPuRRBjSjUGIdUzOQr9iQOY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f4cb25928fafa9ae68660fe71f730fc820a59028",
+        "rev": "82fb7dedaad83e5e279127a38ef410bcfac6d77c",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "master",
+        "ref": "release-25.11",
         "repo": "home-manager",
         "type": "github"
       }
@@ -117,18 +117,34 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1763966396,
-        "narHash": "sha256-6eeL1YPcY1MV3DDStIDIdy/zZCDKgHdkCmsrLJFiZf0=",
+        "lastModified": 1767892417,
+        "narHash": "sha256-dhhvQY67aboBk8b0/u0XB6vwHdgbROZT3fJAjyNh5Ww=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5ae3b07d8d6527c42f17c876e404993199144b6a",
+        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1768028080,
+        "narHash": "sha256-50aDK+8eLvsLK39TzQhKNq50/HcXyP4hyxOYoPoVxjo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d03088749a110d52a4739348f39a63f84bb0be14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -139,7 +155,8 @@
         "home-manager": "home-manager",
         "musnix": "musnix",
         "nix-flatpak": "nix-flatpak",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },
     "systems": {
