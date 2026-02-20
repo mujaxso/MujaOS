@@ -12,7 +12,7 @@ in {
   imports = [
     ffmpeg
     obs
-    davinci-resolve
+    #davinci-resolve
     # kdenlive
     mpv
   ];

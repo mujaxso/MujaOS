@@ -36,7 +36,7 @@
 
       # Streaming
       obs-multi-rtmp
-      distroav
+      #distroav
       obs-source-record
 
       # Hardware acceleration
