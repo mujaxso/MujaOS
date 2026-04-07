@@ -15,6 +15,12 @@
     gtk-engine-murrine
 
     xwayland
+
+    # dev tools
+    glib
+    cairo
+    pango
+    gdk-pixbuf
   ];
 
   gtk = {

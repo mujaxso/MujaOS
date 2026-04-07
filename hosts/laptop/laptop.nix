@@ -9,7 +9,7 @@
     ../../core/core.nix
     ../../modules/desktop/sddm/sddm.nix
     # ../../modules/desktop/suckelss/suckless.nix
-    #../../modules/desktop/light.nix
+    ../../modules/desktop/wayland.nix
     ../../modules/system/system.nix
     ../../modules/lang/lang.nix
     # ../../modules/desktop/xdg.nix

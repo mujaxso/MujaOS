@@ -15,6 +15,7 @@
   # dunst = ./dunst.nix;
   wlogout = ./wlogout.nix;
   xdg = ./xdg.nix;
+  wayland = ./wayland.nix;
 in {
   imports = [
     hyprland
@@ -28,5 +29,6 @@ in {
     # dunst
     wlogout
     xdg
+    # wayland
   ];
 }
