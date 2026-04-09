@@ -25,7 +25,7 @@
         name = "Mujahid Siyam";
         email = "mujaxso@proton.me";
       };
-      
+
       alias = {
         co = "checkout";
         br = "branch";
@@ -38,6 +38,8 @@
       init.defaultBranch = "main";
       pull.rebase = false;
 
+      index.version = 2;
+
       # SSH signing
       gpg.format = "ssh";
       commit.gpgSign = true;
@@ -47,7 +49,7 @@
       user.signingkey = "~/.ssh/id_ed25519.pub";
 
       # Required for verification of SSH signatures
-      gpg.ssh.allowedSignersFile = "${config.xdg.configHome}/git/allowed_signers";
+      gpg.ssh.allowedSignersFile = "${config.home.homeDirectory}/.config/git/allowed_signers";
 
       # Optional: always show signatures in logs
       log.showSignature = true;
