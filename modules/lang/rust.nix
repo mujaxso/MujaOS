@@ -46,6 +46,8 @@ in {
     cairo
     pango
     gdk-pixbuf
+
+    tree-sitter
   ];
 
   environment.variables.PKG_CONFIG_PATH = [
