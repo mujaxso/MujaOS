@@ -12,7 +12,7 @@
     ../../modules/desktop/wayland.nix
     ../../modules/system/system.nix
     ../../modules/lang/lang.nix
-    # ../../modules/desktop/xdg.nix
+    #../../modules/desktop/xdg.nix
     ../../modules/programs/thunar.nix
     # ../../modules/programs/gpg.nix
   ];
@@ -60,7 +60,33 @@
   # Make sure GRUB is OFF
   boot.loader.grub.enable = false;
 
-  xdg.portal.wlr.enable = false;
+  #xdg.portal.wlr.enable = false;
+  # Portal config at NixOS level
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+
+    config = {
+      common = {
+        default = ["hyprland" "gtk"];
+        "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+        "org.freedesktop.impl.portal.OpenURI" = ["gtk"];
+      };
+
+      hyprland = {
+        default = ["hyprland" "gtk"];
+        "org.freedesktop.impl.portal.ScreenCast" = ["hyprland"];
+        "org.freedesktop.impl.portal.Screenshot" = ["hyprland"];
+        "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+        "org.freedesktop.impl.portal.OpenURI" = ["gtk"];
+      };
+    };
+  };
 
   programs.dconf.enable = true;
 
@@ -78,6 +104,7 @@
     neovim
     wget
     zip
+    zenity
   ];
 
   system.stateVersion = "25.05";
