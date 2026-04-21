@@ -60,6 +60,8 @@
   # Make sure GRUB is OFF
   boot.loader.grub.enable = false;
 
+  services.envfs.enable = true;
+
   #xdg.portal.wlr.enable = false;
   # Portal config at NixOS level
   xdg.portal = {
