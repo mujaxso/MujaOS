@@ -40,6 +40,8 @@
 
       index.version = 2;
 
+      core.hooksPath = "~/.config/git/hooks";
+
       # SSH signing
       gpg.format = "ssh";
       commit.gpgSign = true;

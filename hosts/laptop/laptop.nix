@@ -15,6 +15,8 @@
     #../../modules/desktop/xdg.nix
     ../../modules/programs/thunar.nix
     # ../../modules/programs/gpg.nix
+
+    #../../modules/programs/editors/cursor.nix
   ];
 
   # Define your hostname.
@@ -61,6 +63,13 @@
   boot.loader.grub.enable = false;
 
   services.envfs.enable = true;
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 16384;
+    }
+  ];
 
   #xdg.portal.wlr.enable = false;
   # Portal config at NixOS level

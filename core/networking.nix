@@ -12,6 +12,9 @@
     networkmanager = {
       enable = true;
     };
+    # dns
+    nameservers = ["1.1.1.1" "8.8.8.8"];
+    useDHCP = lib.mkDefault true;
 
     firewall = {
       trustedInterfaces = ["virbr0"];
