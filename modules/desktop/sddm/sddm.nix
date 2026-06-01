@@ -58,7 +58,13 @@ in {
   # 🌈 Add Hyprland sessions
   services.displayManager.sessionPackages = [pkgs.hyprland];
 
-  # 📦 Install Astronaut + Catppuccin themes
+  # 🐭 Cursor theme for SDDM (needed before user login)
+  services.displayManager.generic.environment = {
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
+  };
+
+  # 📦 Install Astronaut + Catppuccin themes + cursor
   environment.systemPackages = with pkgs; [
     sddmAstronaut
 
@@ -69,5 +75,7 @@ in {
       fontSize = "10";
       loginBackground = true;
     })
+
+    bibata-cursors
   ];
 }

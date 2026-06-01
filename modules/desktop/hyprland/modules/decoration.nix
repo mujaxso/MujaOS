@@ -1,6 +1,6 @@
 {
   rounding = 8;
-  rounding_power = 2.0; # Adjust curve: 2.0=circle, up to 10.0
+  rounding_power = 2.0;
   blur = {
     enabled = true;
     size = 7;

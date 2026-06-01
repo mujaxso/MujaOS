@@ -40,6 +40,8 @@ in {
   # REQUIRED!
   home.stateVersion = "25.05";
 
+  xdg.userDirs.setSessionVariables = true;
+
   home.packages = with pkgs; [
     grim
     slurp

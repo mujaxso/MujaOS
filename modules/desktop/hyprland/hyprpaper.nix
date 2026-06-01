@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  wallpaperPath = "~/Images/wallpapers/cubes.jpg";
+  wallpaperPath = "${config.home.homeDirectory}/Images/wallpapers/cubes.jpg";
 in
 {
   xdg.configFile."hypr/hyprpaper.conf".text = ''

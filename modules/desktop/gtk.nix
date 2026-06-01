@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{config, pkgs, ...}: {
   home.packages = with pkgs; [
     # --- Themes ---
     materia-theme # GTK2 + GTK3 + GTK4 theme (dark)
@@ -25,6 +25,8 @@
 
   gtk = {
     enable = true;
+
+    gtk4.theme = config.gtk.theme;
 
     # GTK THEME (Materia-dark)
     theme = {

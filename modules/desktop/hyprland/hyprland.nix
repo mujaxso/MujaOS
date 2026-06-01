@@ -1,46 +1,53 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
-  modulesDir = ./modules;
+  inherit (lib.generators) mkLuaInline;
 
-  packages = import (modulesDir + "/packages.nix") {inherit pkgs;};
-  bindings = import (modulesDir + "/bindings.nix");
-  input = import (modulesDir + "/input.nix");
-  general = import (modulesDir + "/general.nix");
-  env = import (modulesDir + "/env.nix");
-  animations = import (modulesDir + "/animations.nix");
-  decoration = import (modulesDir + "/decoration.nix");
-  dwindle = import (modulesDir + "/dwindle.nix");
-  misc = import (modulesDir + "/misc.nix");
-  autostart = import (modulesDir + "/autostart.nix");
-  monitor = import (modulesDir + "/monitor.nix");
-  rules = import (modulesDir + "/rules.nix");
-  layerrule = import (modulesDir + "/layerrule.nix");
+  modulesDir = ./modules;
 in {
-  home.packages = packages;
+  home.packages = import (modulesDir + "/packages.nix") {inherit pkgs;};
 
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "lua";
     xwayland.enable = true;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    extraConfig = ''
-      exec-once = hyprland --config /etc/hypr/hyprland.conf
-    '';
+
     settings = {
-      monitor = monitor;
-      exec-once = autostart;
-      inherit (bindings) bind bindm;
-      input = input;
-      general = general;
-      env = env;
-      animations = animations;
-      decoration = decoration;
-      dwindle = dwindle;
-      misc = misc;
-      rules = rules;
-      layerrule = layerrule;
+      # Variable
+      mainMod = { _var = "SUPER"; };
+
+      # Categories go in config
+      config = {
+        general = import (modulesDir + "/general.nix");
+        decoration = import (modulesDir + "/decoration.nix");
+        input = import (modulesDir + "/input.nix");
+        misc = import (modulesDir + "/misc.nix");
+        dwindle = import (modulesDir + "/dwindle.nix");
+      };
+
+      # Monitor
+      monitor = import (modulesDir + "/monitor.nix");
+
+      # Environment
+      env = import (modulesDir + "/env.nix");
+
+      # Animations
+      curve = import (modulesDir + "/bezier.nix");
+      animation = import (modulesDir + "/animations.nix");
+
+      # Keybindings
+      bind = import (modulesDir + "/bind.nix") {inherit mkLuaInline;};
+
+      # Window and layer rules
+      window_rule = import (modulesDir + "/rules.nix");
+      layer_rule = import (modulesDir + "/layerrule.nix");
+
+      # Startup commands via hl.on
+      on = import (modulesDir + "/startup.nix") {inherit mkLuaInline;};
     };
   };
 }

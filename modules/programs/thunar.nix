@@ -6,7 +6,7 @@
   # Enable Thunar file manager
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
+    plugins = with pkgs; [
       thunar-archive-plugin # Archive management
       thunar-volman # Removable device management
       thunar-media-tags-plugin # Media file tagging

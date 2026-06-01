@@ -2,17 +2,15 @@
   programs.mpv = {
     enable = true;
 
-    package = (
-      pkgs.mpv-unwrapped.wrapper {
-        scripts = with pkgs.mpvScripts; [
-          uosc
-          sponsorblock
-        ];
-        mpv = pkgs.mpv-unwrapped.override {
-          waylandSupport = true;
-        };
-      }
-    );
+    package = pkgs.mpv.override {
+      scripts = with pkgs.mpvScripts; [
+        uosc
+        sponsorblock
+      ];
+      mpv-unwrapped = pkgs.mpv-unwrapped.override {
+        waylandSupport = true;
+      };
+    };
 
     config = {
       profile = "high-quality";

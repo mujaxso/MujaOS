@@ -15,7 +15,12 @@
         hash = "sha256-u94wXumfZQinK7JHAs9tIUMcrn50pTpv5xGL5hhAOqE=";
       };
 
-      buildInputs = [pkgs.xorg.libX11];
+      buildInputs = [pkgs.libx11];
+
+      postPatch = ''
+        substituteInPlace dwmblocks.c \
+          --replace-fail "void termhandler()" "void termhandler(int sig)"
+      '';
 
       makeFlags = ["PREFIX=$(out)"];
 
