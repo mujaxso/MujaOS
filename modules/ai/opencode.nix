@@ -19,7 +19,7 @@
       default_agent = "build";
       snapshot = false;
 
-      model = "openai/gpt-5-mini";
+      model = "deepseek/deepseek-v4-pro";
       small_model = "openai/gpt-5-nano";
 
       provider = {

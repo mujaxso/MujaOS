@@ -59,5 +59,6 @@ in {
     alacritty
     pcmanfm
     brightnessctl
+    sqlite
   ];
 }
