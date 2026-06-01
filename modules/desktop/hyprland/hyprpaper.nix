@@ -5,8 +5,10 @@ let
 in
 {
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ${wallpaperPath}
-    wallpaper = ,${wallpaperPath}
+    wallpaper {
+        monitor = *
+        path = ${wallpaperPath}
+    }
   '';
 
 }
