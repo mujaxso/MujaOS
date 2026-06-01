@@ -19,9 +19,9 @@
       default_agent = "build";
       snapshot = false;
 
-      ui = {
-        sidebar = false;
-      };
+      # ui = {
+      #   sidebar = false;
+      # };
 
       model = "openai/gpt-5-mini";
       small_model = "openai/gpt-5-nano";

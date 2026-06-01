@@ -1,6 +1,6 @@
 ''
 * {
-    font-family: "Ubuntu Mono Nerd Font", "Ubuntu Mono", monospace, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "JetBrainsMono Nerd Font", monospace;
     font-weight: 500;
     font-size: 14px;
     color: #eeeeee;

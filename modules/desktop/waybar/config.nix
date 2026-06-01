@@ -10,7 +10,6 @@
 
     "modules-left" = [
       "hyprland/workspaces"
-      "hyprland/mode"
       "hyprland/window"
     ];
 
