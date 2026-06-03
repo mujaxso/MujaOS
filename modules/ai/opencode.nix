@@ -183,7 +183,6 @@
     };
   };
 
-  # /commit command inside opencode
   home.file.".opencode/commands/commit.md" = {
     text = ''
       ---
@@ -197,7 +196,6 @@
     '';
   };
 
-  # Agent behaviour rules applied to every session
   home.file.".opencode/AGENTS.md" = {
     text = ''
       # Agent Rules
@@ -212,19 +210,22 @@
       - Never run cargo fmt or rustfmt automatically after edits.
       - Only format after the code compiles successfully.
       - Make minimal targeted edits when fixing borrow checker errors.
-      - Always use `cargo check -p <crate>` for validation.
-      - Never run cargo build on the full workspace.
-      - Never run cargo build, cargo test, or cargo run directly — they exceed the bash tool timeout.
+      - Always use `cargo check -p <crate>` for validation — never cargo build on the full workspace.
+      - NEVER run cargo build, cargo test, or cargo run directly — use oc-run instead.
 
-      ## Long-running commands (MANDATORY)
-      - Any command that may take more than 10 seconds MUST run in the background:
-          <command> > /tmp/oc-out.txt 2>&1 &
-          echo "PID:$!"
-      - Read output: cat /tmp/oc-out.txt
-      - Check if running: kill -0 <PID> 2>/dev/null && echo "running" || echo "done"
-      - Wait and read: wait <PID> && cat /tmp/oc-out.txt
-      - Or use the helper: oc-run <command>
-      - Applies to: cargo test, cargo build, cargo run, cargo check on large workspaces, any compiler.
+      ## Long-running commands — THIS IS MANDATORY, NO EXCEPTIONS
+      - The shell tool has a hard timeout of 120 seconds.
+      - ANY command that may take more than 30 seconds MUST use oc-run:
+          oc-run cargo check -p zaroxi-core-engine-render
+          oc-run cargo test -p zaroxi-interface-desktop
+      - oc-run returns immediately with a PID — it never blocks.
+      - After launching with oc-run, read output with: cat /tmp/oc-out.txt
+      - Wait for completion: wait <PID> && cat /tmp/oc-out.txt
+      - Check if still running: kill -0 <PID> 2>/dev/null && echo "running" || echo "done"
+      - Commands that MUST always use oc-run:
+          cargo build, cargo test, cargo run, cargo check (large crates)
+          any grep across the full workspace
+          any compiler or linker invocation
 
       ## Git
       - Use git add -A && git commit -m "<message>" for commits.
@@ -238,13 +239,13 @@
     '';
   };
 
-  # Helper: runs any command in background to avoid bash tool timeout
   home.file.".local/bin/oc-run" = {
     executable = true;
     text = ''
       #!/usr/bin/env bash
       # Usage: oc-run <command and args>
-      # Runs command in background, output goes to /tmp/oc-out.txt
+      # Runs command in background to avoid shell tool timeout.
+      # Output streams to /tmp/oc-out.txt
       rm -f /tmp/oc-out.txt
       "$@" > /tmp/oc-out.txt 2>&1 &
       PID=$!
